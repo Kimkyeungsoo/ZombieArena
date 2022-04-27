@@ -18,8 +18,8 @@ struct ZombieInfo
 {
 	ZombieTypes type;
 	std::string textureFileName;
-	float speed;
-	int health;	// max health
+	float speed = 0;
+	int health = 0;	// max health
 };
 
 class Zombie

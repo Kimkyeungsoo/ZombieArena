@@ -18,9 +18,9 @@ struct AxisInfo
 	list<Keyboard::Key> positivieKeys;
 	list<Keyboard::Key> negativeKeys;
 
-	float sensi;	// 아랫값이 최대최소로 도달하는 속도
-	float limit;	// 
-	float value;	// -1.0 ~ 1.0
+	float sensi = 0;	// 아랫값이 최대최소로 도달하는 속도
+	float limit = 0;	// 
+	float value = 0;	// -1.0 ~ 1.0
 };
 
 class InputMgr

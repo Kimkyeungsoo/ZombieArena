@@ -17,6 +17,9 @@
     <Filter Include="Bullet">
       <UniqueIdentifier>{e077f144-8f7f-4a70-83af-3bc4c3bbd503}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{a5ce7c4e-8117-4c5c-8315-699cfc8168b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\plyer\Player.cpp">
@@ -44,7 +47,25 @@
     <ClCompile Include="source\utils\SceneManager.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="source\utils\Scene.cpp">
+    <ClCompile Include="source\Scene\Scene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Scene\GameOverScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Scene\PlayScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Scene\UpgradeScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Scene\TitleScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="source\utils\UIManager.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="source\utils\ViewManager.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
@@ -73,7 +94,28 @@
     <ClInclude Include="source\utils\SceneManager.h">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="source\utils\Scene.h">
+    <ClInclude Include="source\utils\Singleton.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Scene\Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Scene\GameOverScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Scene\PlayScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Scene\UpgradeScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Scene\TitleScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="source\utils\UIManager.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="source\utils\ViewManager.h">
       <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
