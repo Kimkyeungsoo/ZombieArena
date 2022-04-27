@@ -41,6 +41,12 @@
     <ClCompile Include="source\utils\Pickup.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="source\utils\SceneManager.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="source\utils\Scene.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\plyer\Player.h">
@@ -62,6 +68,12 @@
       <Filter>Bullet</Filter>
     </ClInclude>
     <ClInclude Include="source\utils\Pickup.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="source\utils\SceneManager.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="source\utils\Scene.h">
       <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
