@@ -17,6 +17,7 @@ private:
 	const float START_SPEED = 300.f;
 	const int START_HEALTH = 100;
 	const float START_IMMUNE_MS = 500.f;
+	const int START_DAMAGE = 1;
 
 	Vector2f position;
 
@@ -31,6 +32,7 @@ private:
 	Vector2f lastDir; // 마지막에 입력한 방향
 	float speed;	// max
 
+	int damage;
 	int health;
 	int maxHealth;
 	float immuneMs;
@@ -59,6 +61,7 @@ public:
 	float GetRotation() const;
 	Sprite GetSprite() const;
 	int GetHealth() const;
+	int GetDamage() const;	// 데미지
 
 	void Update(float dt, IntRect arena);
 	bool UpdateCollision(const std::list<Pickup*> items);

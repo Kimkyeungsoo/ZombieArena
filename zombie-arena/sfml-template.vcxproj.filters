@@ -41,6 +41,9 @@
     <ClCompile Include="source\utils\Pickup.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="source\zombie\Blood.cpp">
+      <Filter>Zombie</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\plyer\Player.h">
@@ -63,6 +66,9 @@
     </ClInclude>
     <ClInclude Include="source\utils\Pickup.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="source\zombie\Blood.h">
+      <Filter>Zombie</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

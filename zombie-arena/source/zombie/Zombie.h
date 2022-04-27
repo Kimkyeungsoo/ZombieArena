@@ -50,5 +50,7 @@ public:
 
 	FloatRect GetGlobalBound();
 	Sprite GetSprite();
+
+	int GetHealth() const;
 };
 

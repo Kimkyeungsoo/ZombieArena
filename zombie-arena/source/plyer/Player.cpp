@@ -8,7 +8,7 @@
 #include "../utils/Pickup.h"
 
 Player::Player()
-	: speed(START_SPEED), health(START_HEALTH), maxHealth(START_HEALTH), immuneMs(START_IMMUNE_MS), arena(), resolution(), tileSize(0), textureFileName("graphics/player.png"), distanceToMuzzle(45.f)
+	: speed(START_SPEED), health(START_HEALTH), maxHealth(START_HEALTH), immuneMs(START_IMMUNE_MS), arena(), resolution(), tileSize(0), textureFileName("graphics/player.png"), distanceToMuzzle(45.f), damage(START_DAMAGE)
 {
 	//texture.loadFromFile("graphics/player.png");
 	sprite.setTexture(TextureHolder::GetTexture(textureFileName));
@@ -106,6 +106,11 @@ int Player::GetHealth() const
 	return health;
 }
 
+int Player::GetDamage() const
+{
+	return damage;
+}
+
 void Player::Update(float dt, IntRect arena)
 {
 	Vector2f positionTemp = position;
@@ -161,7 +166,7 @@ void Player::Update(float dt, IntRect arena)
 	while (it != useBullets.end())
 	{
 		Bullet* bullet = *it;
-		bullet->Update(dt);
+		bullet->Update(dt, arena);
 
 		if (!bullet->IsActive())
 		{

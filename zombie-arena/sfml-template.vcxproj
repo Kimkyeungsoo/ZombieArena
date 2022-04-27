@@ -155,6 +155,7 @@
     <ClCompile Include="source\utils\TextureHolder.cpp" />
     <ClCompile Include="source\utils\Utils.cpp" />
     <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\zombie\Blood.cpp" />
     <ClCompile Include="source\zombie\Zombie.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -164,6 +165,7 @@
     <ClInclude Include="source\utils\Pickup.h" />
     <ClInclude Include="source\utils\TextureHolder.h" />
     <ClInclude Include="source\utils\Utils.h" />
+    <ClInclude Include="source\zombie\Blood.h" />
     <ClInclude Include="source\zombie\Zombie.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

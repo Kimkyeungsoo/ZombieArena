@@ -27,7 +27,7 @@ public:
 	void SetActive(bool active);
 	void Shoot(Vector2f pos, Vector2f dir);
 	void Stop();
-	void Update(float dt);
+	void Update(float dt, IntRect arena);
 	
 	bool UpdateCollision(const std::vector<Zombie*>& zombies);
 
