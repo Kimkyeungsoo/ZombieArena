@@ -38,13 +38,18 @@ void Bullet::Stop()
 	SetActive(false);
 }
 
-void Bullet::Update(float dt)
+void Bullet::Update(float dt, IntRect arena)
 {
 	position += direction * speed * dt;
 	shape.setPosition(position);
 
 	distance += speed * dt;
 	if (distance > DEFAULT_DISTANCE)
+	{
+		Stop();
+	}
+	if (position.x < arena.left + 50.f || position.x > arena.width - 50.f
+		|| position.y < arena.top + 50.f || position.y > arena.height - 50.f)
 	{
 		Stop();
 	}

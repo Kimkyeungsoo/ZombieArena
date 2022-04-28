@@ -185,10 +185,15 @@ int main()
 		* Update
 		**********************************/
 		InputMgr::Update(dt.asSeconds(), window, mainView);
-
+		int count = 0;
 		for (auto zombie : zombies)
 		{
 			zombie->Update(dt.asSeconds(), player.GetPosition(), arena);
+			if (zombie->GetHealth() <= 0)
+			{
+				zombies.erase(zombies.begin() + count);
+			}
+			count++;
 		}
 
 		ammoPickup.Update(dt.asSeconds());
