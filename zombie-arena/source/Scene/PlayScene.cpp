@@ -26,7 +26,7 @@ PlayScene::~PlayScene()
 
 void PlayScene::Init()
 {
-	SetArenaSize(800, 800);
+	SetArenaSize(GameLevelData::GetInstance()->GetArena_x(), GameLevelData::GetInstance()->GetArena_y());
 	AddItems();
 
 	Player::GetInstance()->Spawn(arena, ViewManager::GetInstance()->GetResolution(), 0);

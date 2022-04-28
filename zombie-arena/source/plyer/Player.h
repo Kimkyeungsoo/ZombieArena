@@ -45,7 +45,6 @@ private:
 	std::list<Bullet*> unuseBullets;	// 사용하지 않은 불릿
 	std::list<Bullet*> useBullets;	//	사용중인 불릿
 
-
 	int totalAmmo;	//전체 탄 수
 	int haveAmmo;	//현재 가지고 있는 탄 수
 	float timer = 2.f;

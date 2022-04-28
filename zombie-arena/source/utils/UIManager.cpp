@@ -211,7 +211,7 @@ void UIManager::Init_UpgradeScene()
 		textUpgrades.push_back(text);
 	}
 
-	textUpgrades[0].setString("1- INCREASED RATE OF FIRE");
+	textUpgrades[0].setString("1- INCREASED SIZE OF MAP");
 	textUpgrades[1].setString("2- INCREASED CLIP SIZE(NEXT RELOAD)");
 	textUpgrades[2].setString("3- INCREASED MAX HEALTH");
 	textUpgrades[3].setString("4- INCREASED RUN SPEED");
@@ -240,7 +240,8 @@ void UIManager::Update_UpgradeScene()
 			{
 				switch (i)
 				{
-				case RATE_OF_FIRE:
+				case SIZE_OF_MAP:
+					GameLevelData::GetInstance()->UpgradeMapSize();
 					break;
 				case CLIP_SIZE:
 					GameLevelData::GetInstance()->UpgradeClipSize();

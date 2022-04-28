@@ -20,6 +20,16 @@ int GameLevelData::GetHighScore()
     return highScore;
 }
 
+int GameLevelData::GetArena_x()
+{
+    return arena_x;
+}
+
+int GameLevelData::GetArena_y()
+{
+    return arena_y;
+}
+
 int GameLevelData::GetClipSize()
 {
     return level_ClipSize;
@@ -47,6 +57,8 @@ float GameLevelData::GetSpawnTime_AP()
 
 void GameLevelData::SetDefaultData()
 {
+    arena_x = 600;
+    arena_y = 600;
     countZombies = 10;
     wave = 1;
     score = 0;
@@ -83,6 +95,12 @@ void GameLevelData::SetScore(int score)
 void GameLevelData::SetHighScore(int highScore)
 {
     this->highScore = highScore;
+}
+
+void GameLevelData::UpgradeMapSize()
+{
+    arena_x += 100;
+    arena_y += 100;
 }
 
 void GameLevelData::UpgradeClipSize()

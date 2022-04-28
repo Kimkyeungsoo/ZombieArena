@@ -4,7 +4,7 @@
 #include "Singleton.h"
 #include <vector>
 
-#define RATE_OF_FIRE 0
+#define SIZE_OF_MAP 0
 #define CLIP_SIZE 1
 #define MAX_HEALTH 2
 #define SPEED 3
