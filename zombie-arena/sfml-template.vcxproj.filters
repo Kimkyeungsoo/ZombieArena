@@ -1,43 +1,130 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="source\Scene\GameOverScene.cpp" />
-    <ClCompile Include="source\Scene\PlayScene.cpp" />
-    <ClCompile Include="source\Scene\Scene.cpp" />
-    <ClCompile Include="source\utils\SceneManager.cpp" />
-    <ClCompile Include="source\bullet\Bullet.cpp" />
-    <ClCompile Include="source\plyer\Player.cpp" />
-    <ClCompile Include="source\utils\InputMgr.cpp" />
-    <ClCompile Include="source\utils\Pickup.cpp" />
-    <ClCompile Include="source\utils\TextureHolder.cpp" />
-    <ClCompile Include="source\utils\Utils.cpp" />
     <ClCompile Include="source\main.cpp" />
-    <ClCompile Include="source\zombie\Blood.cpp" />
-    <ClCompile Include="source\zombie\Zombie.cpp" />
-    <ClCompile Include="source\Scene\TitleScene.cpp" />
-    <ClCompile Include="source\Scene\UpgradeScene.cpp" />
-    <ClCompile Include="source\utils\UIManager.cpp" />
-    <ClCompile Include="source\utils\ViewManager.cpp" />
-    <ClCompile Include="source\utils\GameLevelData.cpp" />
+    <ClCompile Include="source\bullet\Bullet.cpp">
+      <Filter>bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="source\plyer\Player.cpp">
+      <Filter>player</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Scene\GameOverScene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Scene\PlayScene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Scene\Scene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Scene\TitleScene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Scene\UpgradeScene.cpp">
+      <Filter>scene</Filter>
+    </ClCompile>
+    <ClCompile Include="source\zombie\Blood.cpp">
+      <Filter>zombie</Filter>
+    </ClCompile>
+    <ClCompile Include="source\zombie\Zombie.cpp">
+      <Filter>zombie</Filter>
+    </ClCompile>
+    <ClCompile Include="source\utils\GameLevelData.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="source\utils\InputMgr.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="source\utils\Pickup.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="source\utils\SceneManager.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="source\utils\TextureHolder.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="source\utils\UIManager.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="source\utils\Utils.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
+    <ClCompile Include="source\utils\ViewManager.cpp">
+      <Filter>utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\Scene\GameOverScene.h" />
-    <ClInclude Include="source\Scene\PlayScene.h" />
-    <ClInclude Include="source\Scene\Scene.h" />
-    <ClInclude Include="source\utils\SceneManager.h" />
-    <ClInclude Include="source\bullet\Bullet.h" />
-    <ClInclude Include="source\plyer\Player.h" />
-    <ClInclude Include="source\utils\InputMgr.h" />
-    <ClInclude Include="source\utils\Pickup.h" />
-    <ClInclude Include="source\utils\Singleton.h" />
-    <ClInclude Include="source\utils\TextureHolder.h" />
-    <ClInclude Include="source\utils\Utils.h" />
-    <ClInclude Include="source\zombie\Blood.h" />
-    <ClInclude Include="source\zombie\Zombie.h" />
-    <ClInclude Include="source\Scene\TitleScene.h" />
-    <ClInclude Include="source\Scene\UpgradeScene.h" />
-    <ClInclude Include="source\utils\UIManager.h" />
-    <ClInclude Include="source\utils\ViewManager.h" />
-    <ClInclude Include="source\utils\GameLevelData.h" />
+    <ClInclude Include="source\bullet\Bullet.h">
+      <Filter>bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="source\plyer\Player.h">
+      <Filter>player</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Scene\GameOverScene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Scene\PlayScene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Scene\Scene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Scene\TitleScene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="source\Scene\UpgradeScene.h">
+      <Filter>scene</Filter>
+    </ClInclude>
+    <ClInclude Include="source\zombie\Blood.h">
+      <Filter>zombie</Filter>
+    </ClInclude>
+    <ClInclude Include="source\zombie\Zombie.h">
+      <Filter>zombie</Filter>
+    </ClInclude>
+    <ClInclude Include="source\utils\GameLevelData.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="source\utils\InputMgr.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="source\utils\Pickup.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="source\utils\SceneManager.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="source\utils\Singleton.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="source\utils\TextureHolder.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="source\utils\UIManager.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="source\utils\Utils.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+    <ClInclude Include="source\utils\ViewManager.h">
+      <Filter>utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="bullet">
+      <UniqueIdentifier>{9edc58af-cba7-4252-af6a-e9b660db87d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="player">
+      <UniqueIdentifier>{8ca1096d-aa0d-4cbb-bb4b-d020dab93c6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="utils">
+      <UniqueIdentifier>{964a5507-69d1-4e0c-a6aa-78db0d09a0a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="scene">
+      <UniqueIdentifier>{d612cd89-e866-4299-bc5d-6037bf3b18a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="zombie">
+      <UniqueIdentifier>{9eb43cee-006f-44c9-a2d7-d0a5e64e1dd5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
