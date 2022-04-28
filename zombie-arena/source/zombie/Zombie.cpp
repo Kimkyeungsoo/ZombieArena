@@ -43,8 +43,7 @@ Zombie::Zombie()
 
 bool Zombie::OnHitted()
 {
-	Player player;
-	health -= player.GetDamage();
+	health -= Player::GetInstance()->GetDamage();
 	if (health <= 0)
 	{
 		SetAlive(false);

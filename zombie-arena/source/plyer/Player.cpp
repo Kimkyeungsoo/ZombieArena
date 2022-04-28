@@ -225,10 +225,16 @@ bool Player::UpdateCollision(const std::list<Pickup*> items)
 			switch (item->GetType())
 			{
 			case PickupTypes::Ammo:
-				haveAmmo += item->GotIt();
+				if (item->GetIsGetIt())
+				{
+					haveAmmo += item->GotIt();
+				}
 				break;
 			case PickupTypes::Health:
-				health += item->GotIt();
+				if (item->GetIsGetIt())
+				{
+					health += item->GotIt();
+				}
 				break;
 			default:
 				break;

@@ -78,7 +78,10 @@ void PlayScene::Draw(RenderWindow& window)
 
 	for (auto item : items)
 	{
-		window.draw(item->GetSprite());
+		if (item->GetIsGetIt())
+		{
+			window.draw(item->GetSprite());
+		}
 	}
 
 	for (auto zombie : zombies)
