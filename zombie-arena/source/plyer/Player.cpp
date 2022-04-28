@@ -21,9 +21,14 @@ Player::Player()
 		unuseBullets.push_back(new Bullet());
 	}
 
-
 	totalAmmo = 30;
 	haveAmmo = totalAmmo;
+
+	font.loadFromFile("fonts/zombiecontrol.ttf");
+	textReloading.setString("RELOADING...");
+	textReloading.setCharacterSize(15);
+	textReloading.setFillColor(Color::Green);
+	textReloading.setFont(font);
 }
 
 Player::~Player()
@@ -270,6 +275,13 @@ void Player::Draw(RenderWindow& window)
 	for (auto bullet : useBullets)
 	{
 		window.draw(bullet->GetShape());
+	}
+
+	if (Reloading)
+	{
+		textReloading.setPosition(position.x, position.y-30.f);
+		Utils::SetOrigin(textReloading, Pivots::CT);
+		window.draw(textReloading);
 	}
 }
 

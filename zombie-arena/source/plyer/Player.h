@@ -50,6 +50,8 @@ private:
 	int haveAmmo;	//현재 가지고 있는 탄 수
 	float timer = 2.f;
 
+	Font font;
+	Text textReloading;
 	bool Reloading = false;
 
 	float distanceToMuzzle;
