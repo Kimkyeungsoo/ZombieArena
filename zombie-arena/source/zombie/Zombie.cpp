@@ -1,10 +1,10 @@
 #include "Zombie.h"
 #include "../utils/TextureHolder.h"
 #include "../utils/Utils.h"
-#include <iostream>
 #include "../plyer/Player.h"
 #include "../utils/GameLevelData.h"
 #include "../utils/ViewManager.h"
+#include <iostream>
 
 std::vector<ZombieInfo> Zombie::zombieInfo;
 bool Zombie::isInitInfo = false;

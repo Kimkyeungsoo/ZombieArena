@@ -2,7 +2,7 @@
 #pragma once
 
 #include "SFML/Graphics.hpp"
-#include "..\utils\Singleton.h"
+#include "../utils/Singleton.h"
 #include <string>
 #include "../bullet/Bullet.h"
 #include <list>
@@ -37,7 +37,6 @@ private:
 	int health;
 	int maxHealth;
 	float immuneMs;
-	//bool inmune;
 
 	Time lastHit;
 
@@ -70,7 +69,7 @@ public:
 	float GetRotation() const;
 	Sprite GetSprite() const;
 	int GetHealth() const;
-	int GetDamage() const;	// µ¥¹ÌÁö
+	int GetDamage() const;
 
 	void Update(float dt, IntRect arena);
 	bool UpdateCollision(const std::list<Pickup*> items);

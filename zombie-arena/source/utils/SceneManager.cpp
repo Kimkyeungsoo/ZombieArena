@@ -1,10 +1,10 @@
 #include "SceneManager.h"
-#include "..\Scene\TitleScene.h"
-#include "..\Scene\PlayScene.h"
-#include "..\Scene\UpgradeScene.h"
-#include "..\Scene\GameOverScene.h"
-#include "..\utils\UIManager.h"
-#include "..\utils\ViewManager.h"
+#include "../Scene/TitleScene.h"
+#include "../Scene/PlayScene.h"
+#include "../Scene/UpgradeScene.h"
+#include "../Scene/GameOverScene.h"
+#include "../utils/UIManager.h"
+#include "../utils/ViewManager.h"
 
 void SceneManager::LoadScene(SCENE_TYPE type)
 {

@@ -1,7 +1,7 @@
 #include "TitleScene.h"
-#include "..\utils\TextureHolder.h"
-#include "..\utils\InputMgr.h"
-#include "..\utils\SceneManager.h"
+#include "../utils/TextureHolder.h"
+#include "../utils/InputMgr.h"
+#include "../utils/SceneManager.h"
 
 TitleScene::TitleScene()
 {
@@ -19,7 +19,6 @@ void TitleScene::Init()
 
 void TitleScene::Update(float dt)
 {
-	// Enter key input, change to playscene
 	if (InputMgr::GetKeyDown(Keyboard::Enter))
 	{
 		SceneManager::GetInstance()->LoadScene(SCENE_TYPE::PLAY);

@@ -1,15 +1,15 @@
 #include "PlayScene.h"
-#include "..\utils\Utils.h"
-#include "..\utils\TextureHolder.h"
-#include "..\zombie\Zombie.h"
-#include "..\utils\Pickup.h"
-#include "..\utils\ViewManager.h"
-#include "..\utils\InputMgr.h"
-#include "..\utils\SceneManager.h"
-#include "..\utils\ViewManager.h"
-#include "..\plyer\Player.h"
-#include "..\utils\UIManager.h"
-#include "..\utils\GameLevelData.h"
+#include "../utils/Utils.h"
+#include "../utils/TextureHolder.h"
+#include "../zombie/Zombie.h"
+#include "../utils/Pickup.h"
+#include "../utils/ViewManager.h"
+#include "../utils/InputMgr.h"
+#include "../utils/SceneManager.h"
+#include "../utils/ViewManager.h"
+#include "../plyer/Player.h"
+#include "../utils/UIManager.h"
+#include "../utils/GameLevelData.h"
 
 PlayScene::PlayScene()
 	:countZombies(GameLevelData::GetInstance()->GetCountZombies())
@@ -37,7 +37,6 @@ void PlayScene::Init()
 
 void PlayScene::Update(float dt)
 {
-	// playTime은 Time형 dt는 float형이라 일단 임시
 	playTime += clock.restart();
 	
 	for (auto zombie : zombies)

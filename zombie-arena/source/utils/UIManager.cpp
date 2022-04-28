@@ -3,7 +3,7 @@
 #include "ViewManager.h"
 #include "../plyer/Player.h"
 #include "GameLevelData.h"
-#include "..\utils\InputMgr.h"
+#include "../utils/InputMgr.h"
 #include <sstream>
 
 void UIManager::Init(SCENE_TYPE type)
@@ -147,8 +147,6 @@ void UIManager::Init_PlayScene()
 	textureAmmoIcon = TextureHolder::GetTexture("graphics/ammo_icon.png");
 	spriteAmmoIcon.setTexture(textureAmmoIcon);
 	spriteAmmoIcon.setPosition(140.f, 975.f);
-		
-	// PlayScene에서 사용될 UI 초기설정 등록
 }
 
 void UIManager::Draw_PlayScene(RenderWindow& window)
@@ -166,7 +164,6 @@ void UIManager::Draw_PlayScene(RenderWindow& window)
 	window.draw(textAmmo);
 	window.draw(spriteAmmoIcon);
 	window.draw(textHealth);
-	// PlayScene에서 사용되는 UI들 Draw
 }
 
 void UIManager::Update_PlayScene()
@@ -230,12 +227,13 @@ void UIManager::Update_UpgradeScene()
 	bool isChooseUpgrade = false;
 	auto pos = InputMgr::GetMousePosition();
 
+	// 업그레이드 항목 UI TEXT에 마우스 호버링 체크
 	for (int i = 0; i < 6; ++i)
 	{
 		if (textUpgrades[i].getGlobalBounds().contains(pos.x, pos.y))
 		{
 			textUpgrades[i].setFillColor(Color::Red);
-			// 클릭했을 때
+			// 해당 항목을 클릭했을 때
 			if (InputMgr::GetMouseButtonDown(Mouse::Button::Left))
 			{
 				switch (i)

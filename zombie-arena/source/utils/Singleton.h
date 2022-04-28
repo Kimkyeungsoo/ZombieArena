@@ -3,7 +3,7 @@
 template <typename T>
 class Singleton
 {
-protected: // private:
+protected:
 	Singleton() {}
 	~Singleton() {}
 	static T* instance; 

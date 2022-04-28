@@ -56,13 +56,12 @@ void InputMgr::ClearInput()
 	downButtons.clear();
 }
 
-void InputMgr::ProcessInput(const Event& event) // ´©±¸³Ä ³Í ¿øÇÏ´Â°Ô ¹¹¾ß....
+void InputMgr::ProcessInput(const Event& event)
 {
 	// event.key.code
 	switch (event.type)
 	{
 	case Event::KeyPressed:
-		// ??
 		if (!GetKey(event.key.code))
 		{
 			downKeys.push_back(event.key.code);
@@ -70,7 +69,6 @@ void InputMgr::ProcessInput(const Event& event) // ´©±¸³Ä ³Í ¿øÇÏ´Â°Ô ¹¹¾ß....
 		}
 		break;
 	case Event::KeyReleased:
-		// ??
 		ingKeys.remove(event.key.code);
 		upKeys.push_back(event.key.code);
 		break;
