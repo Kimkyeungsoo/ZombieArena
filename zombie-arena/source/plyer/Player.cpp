@@ -88,8 +88,6 @@ void Player::Spawn(IntRect arena, Vector2i res, int tileSize)
 
 bool Player::OnHitted(Time timeHit)
 {
-	// 플레이어 피격 판정
-	ViewManager::GetInstance()->CameraShake(timeHit.asSeconds());
 	if (timeHit.asMilliseconds() - lastHit.asMilliseconds() > immuneMs)
 	{
 		std::cout << timeHit.asSeconds() << std::endl;
@@ -97,6 +95,7 @@ bool Player::OnHitted(Time timeHit)
 		health -= 10;
 		return true;
 	}
+	ViewManager::GetInstance()->CameraShake(timeHit.asSeconds());
 	return false;
 }
 

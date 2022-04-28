@@ -17,7 +17,7 @@ class Player : public Singleton<Player>
 private:
 	const float START_SPEED = 300.f;
 	const int START_HEALTH = 100;
-	const float START_IMMUNE_MS = 500.f;
+	const float START_IMMUNE_MS = 300.f;
 	const int START_DAMAGE = 1;
 
 	Vector2f position;
