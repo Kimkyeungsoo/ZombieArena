@@ -36,7 +36,7 @@ void PlayScene::Update(float dt)
 {
 	// playTime은 Time형 dt는 float형이라 일단 임시
 	playTime += clock.restart();
-
+	
 	for (auto zombie : zombies)
 	{
 		zombie->Update(dt, player.GetPosition(), arena);
@@ -64,6 +64,14 @@ void PlayScene::Draw(RenderWindow& window)
 {
 	window.draw(tileMap, &textureBackground);
 
+	for (auto zombie : zombies)
+	{
+		if (!zombie->IsAlive() && zombie->IsTime())
+		{
+		window.draw(zombie->GetBlood().GetSprite());
+		}
+	}
+
 	for (auto item : items)
 	{
 		window.draw(item->GetSprite());
@@ -71,7 +79,10 @@ void PlayScene::Draw(RenderWindow& window)
 
 	for (auto zombie : zombies)
 	{
-		window.draw(zombie->GetSprite());
+		if (zombie->IsAlive())
+		{
+			window.draw(zombie->GetSprite());
+		}
 	}
 
 	player.Draw(window);
