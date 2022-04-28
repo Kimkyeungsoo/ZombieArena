@@ -48,6 +48,7 @@ bool Zombie::OnHitted()
 	if (health <= 0)
 	{
 		GameLevelData::GetInstance()->AddScore(1);
+		GameLevelData::GetInstance()->AddZombies(-1);
 		SetAlive(false);
 	}
 	return false;

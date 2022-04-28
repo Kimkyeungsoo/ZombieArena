@@ -25,9 +25,19 @@ int GameLevelData::GetClipSize()
     return level_ClipSize;
 }
 
-void GameLevelData::SetCountZombies(int count)
+void GameLevelData::SetDefaultData()
 {
-    countZombies = count;
+    countZombies = 10;
+    wave = 1;
+    score = 0;
+    level_ClipSize = 0;
+    level_Zombie = 0;
+}
+
+void GameLevelData::LevelUpCountZombies()
+{
+    level_Zombie++;
+    countZombies = 10 + level_Zombie * 5;
 }
 
 void GameLevelData::AddZombies(int count)
@@ -35,9 +45,9 @@ void GameLevelData::AddZombies(int count)
     countZombies += count;
 }
 
-void GameLevelData::SetWave(int value)
+void GameLevelData::AddWave()
 {
-    wave = value;
+    wave++;
 }
 
 void GameLevelData::AddScore(int value)

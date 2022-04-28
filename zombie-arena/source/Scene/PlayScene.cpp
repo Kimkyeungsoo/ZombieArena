@@ -12,7 +12,7 @@
 #include "..\utils\GameLevelData.h"
 
 PlayScene::PlayScene()
-	:countZombies(10)
+	:countZombies(GameLevelData::GetInstance()->GetCountZombies())
 {
 	textureBackground = TextureHolder::GetTexture("graphics/background_sheet.png");
 	textureCrosshair = TextureHolder::GetTexture("graphics/crosshair.png");
@@ -63,14 +63,17 @@ void PlayScene::Update(float dt)
 
 	UIManager::GetInstance()->Update_PlayScene();
 
-	// 씬넘어가기 위한 테스트용
-	if (InputMgr::GetKeyDown(Keyboard::Space))
+	
+	if (GameLevelData::GetInstance()->GetCountZombies() == 0)
 	{
+		GameLevelData::GetInstance()->LevelUpCountZombies();
+		GameLevelData::GetInstance()->AddWave();
 		SceneManager::GetInstance()->LoadScene(SCENE_TYPE::UPGRADE);
 	}
 
 	if (Player::GetInstance()->GetHealth() <= 0.f)
 	{
+		GameLevelData::GetInstance()->SetDefaultData();
 		SceneManager::GetInstance()->LoadScene(SCENE_TYPE::GAME_OVER);
 		return;
 	}
