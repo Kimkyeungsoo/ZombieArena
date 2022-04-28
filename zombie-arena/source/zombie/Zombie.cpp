@@ -8,7 +8,7 @@ std::vector<ZombieInfo> Zombie::zombieInfo;
 bool Zombie::isInitInfo = false;
 
 Zombie::Zombie()
-	: alive(true)
+	: alive(true), health(0), speed(0), zombieType(ZombieTypes::BLOATER)
 {
 	if (!isInitInfo)
 	{

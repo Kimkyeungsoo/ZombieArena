@@ -30,26 +30,26 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -79,7 +79,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>..\$(ProjectName)-bin</OutDir>
+    <OutDir>..\$(ProjectName)-bin\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -148,7 +148,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="source\utils\Scene.cpp" />
+    <ClCompile Include="source\Scene\GameOverScene.cpp" />
+    <ClCompile Include="source\Scene\PlayScene.cpp" />
+    <ClCompile Include="source\Scene\Scene.cpp" />
     <ClCompile Include="source\utils\SceneManager.cpp" />
     <ClCompile Include="source\bullet\Bullet.cpp" />
     <ClCompile Include="source\plyer\Player.cpp" />
@@ -159,18 +161,29 @@
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\zombie\Blood.cpp" />
     <ClCompile Include="source\zombie\Zombie.cpp" />
+    <ClCompile Include="source\Scene\TitleScene.cpp" />
+    <ClCompile Include="source\Scene\UpgradeScene.cpp" />
+    <ClCompile Include="source\utils\UIManager.cpp" />
+    <ClCompile Include="source\utils\ViewManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\utils\Scene.h" />
+    <ClInclude Include="source\Scene\GameOverScene.h" />
+    <ClInclude Include="source\Scene\PlayScene.h" />
+    <ClInclude Include="source\Scene\Scene.h" />
     <ClInclude Include="source\utils\SceneManager.h" />
     <ClInclude Include="source\bullet\Bullet.h" />
     <ClInclude Include="source\plyer\Player.h" />
     <ClInclude Include="source\utils\InputMgr.h" />
     <ClInclude Include="source\utils\Pickup.h" />
+    <ClInclude Include="source\utils\Singleton.h" />
     <ClInclude Include="source\utils\TextureHolder.h" />
     <ClInclude Include="source\utils\Utils.h" />
     <ClInclude Include="source\zombie\Blood.h" />
     <ClInclude Include="source\zombie\Zombie.h" />
+    <ClInclude Include="source\Scene\TitleScene.h" />
+    <ClInclude Include="source\Scene\UpgradeScene.h" />
+    <ClInclude Include="source\utils\UIManager.h" />
+    <ClInclude Include="source\utils\ViewManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
