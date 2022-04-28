@@ -81,6 +81,8 @@ public:
 
 	void UpgradeSpeed();
 	void UpgradeMaxHealth();
+	void UpgradeClipSize();
+	void UpgradeRateOfFire();
 
 	void Reload();
 	int GetHaveAmmo();

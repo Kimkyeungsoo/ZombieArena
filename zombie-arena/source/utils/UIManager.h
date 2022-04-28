@@ -14,7 +14,7 @@ private:
 	Font fontZombiecontrol;
 	FloatRect textRect;
 
-
+	Text textHighScoreNumber;
 	Text textScore;
 	Text textZombieCount;
 	Text textAmmo;
@@ -34,7 +34,9 @@ private:
 	// 화면에 그려주는 UI이며 별도로 추가삭제가 일어나지 않기 때문에
 	// 이 경우 vector가 유리하지 않을까?
 	std::vector<Text> textUpgrades;
-	
+
+	Text textGameOver;
+	Text textRestart;
 
 public:
 	void SetTextRect(Text& text);
@@ -51,5 +53,9 @@ public:
 
 	void Init_UpgradeScene();
 	void Draw_UpgradeScene(RenderWindow& window);
+	void Update_UpgradeScene();
+
+	void Init_GameOverScene();
+	void Draw_GameOverScene(RenderWindow& window);
 };
 

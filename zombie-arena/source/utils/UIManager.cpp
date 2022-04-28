@@ -2,6 +2,8 @@
 #include "TextureHolder.h"
 #include "ViewManager.h"
 #include "../plyer/Player.h"
+#include "GameLevelData.h"
+#include "..\utils\InputMgr.h"
 #include <sstream>
 
 void UIManager::Init(SCENE_TYPE type)
@@ -20,6 +22,7 @@ void UIManager::Init(SCENE_TYPE type)
 		Init_UpgradeScene();
 		break;
 	case SCENE_TYPE::GAME_OVER:
+		Init_GameOverScene();
 		break;
 	case SCENE_TYPE::NONE:
 		break;
@@ -46,6 +49,8 @@ void UIManager::Draw(SCENE_TYPE type, RenderWindow& window)
 		Draw_UpgradeScene(window);
 		break;
 	case SCENE_TYPE::GAME_OVER:
+		window.setMouseCursorVisible(true);
+		Draw_GameOverScene(window);
 		break;
 	case SCENE_TYPE::NONE:
 		break;
@@ -67,6 +72,15 @@ void UIManager::Init_TitleScene()
 	textHighScore.setCharacterSize(45);
 	textHighScore.setFillColor(Color::White);
 	textHighScore.setFont(fontZombiecontrol);
+
+	stringstream ss;
+	ss << GameLevelData::GetInstance()->GetHighScore();
+	textHighScoreNumber.setString(ss.str());
+	textHighScoreNumber.setPosition(1680.f, 10.f);
+	textHighScoreNumber.setCharacterSize(45);
+	textHighScoreNumber.setFillColor(Color::White);
+	textHighScoreNumber.setFont(fontZombiecontrol);
+
 }
 
 void UIManager::SetTextRect(Text& text)
@@ -82,6 +96,7 @@ void UIManager::Draw_TitleScene(RenderWindow& window)
 {
 	window.draw(textMessage);
 	window.draw(textHighScore);
+	window.draw(textHighScoreNumber);
 }
 
 void UIManager::Init_PlayScene()
@@ -155,4 +170,69 @@ void UIManager::Draw_UpgradeScene(RenderWindow& window)
 {
 	for (auto& text : textUpgrades)
 		window.draw(text);
+}
+
+void UIManager::Update_UpgradeScene()
+{
+	bool isChooseUpgrade = false;
+	auto pos = InputMgr::GetMousePosition();
+
+	for (int i = 0; i < 6; ++i)
+	{
+		if (textUpgrades[i].getGlobalBounds().contains(pos.x, pos.y))
+		{
+			textUpgrades[i].setFillColor(Color::Red);
+			// 클릭했을 때
+			if (InputMgr::GetMouseButtonDown(Mouse::Button::Left))
+			{
+				switch (i)
+				{
+				case 0:
+					Player::GetInstance()->UpgradeRateOfFire();
+					isChooseUpgrade = true;
+					break;
+				case 1:
+					Player::GetInstance()->UpgradeClipSize();
+					isChooseUpgrade = true;
+					break;
+				case 2:
+					Player::GetInstance()->UpgradeMaxHealth();
+					isChooseUpgrade = true;
+					break;
+				case 3:
+					Player::GetInstance()->UpgradeSpeed();
+					isChooseUpgrade = true;
+					break;
+				}
+			}
+		}
+		else
+		{
+			textUpgrades[i].setFillColor(Color::White);
+		}
+	}
+
+	if(isChooseUpgrade)
+		SceneManager::GetInstance()->LoadScene(SCENE_TYPE::PLAY);
+}
+
+void UIManager::Init_GameOverScene()
+{
+	textGameOver.setString("~ GAME OVER ~");
+	textGameOver.setPosition(730.f, 600.f);
+	textGameOver.setCharacterSize(75);
+	textGameOver.setFillColor(Color::White);
+	textGameOver.setFont(fontZombiecontrol);
+
+	textRestart.setString("PRESS ENTER KEY TO RESTART");
+	textRestart.setPosition(525.f, 700.f);
+	textRestart.setCharacterSize(75);
+	textRestart.setFillColor(Color::White);
+	textRestart.setFont(fontZombiecontrol);
+}
+
+void UIManager::Draw_GameOverScene(RenderWindow& window)
+{
+	window.draw(textGameOver);
+	window.draw(textRestart);
 }

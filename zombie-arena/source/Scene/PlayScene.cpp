@@ -62,6 +62,12 @@ void PlayScene::Update(float dt)
 	{
 		SceneManager::GetInstance()->LoadScene(SCENE_TYPE::UPGRADE);
 	}
+
+	if (Player::GetInstance()->GetHealth() <= 0.f)
+	{
+		SceneManager::GetInstance()->LoadScene(SCENE_TYPE::GAME_OVER);
+		return;
+	}
 }
 
 void PlayScene::Draw(RenderWindow& window)
@@ -220,7 +226,6 @@ void PlayScene::CollisionCheck()
 			break;
 		}
 	}
-
 	Player::GetInstance()->UpdateCollision(items);
 }
 
