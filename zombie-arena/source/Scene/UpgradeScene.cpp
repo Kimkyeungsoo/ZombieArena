@@ -30,6 +30,11 @@ void UpgradeScene::Update(float dt)
 	{
 		SceneManager::GetInstance()->LoadScene(SCENE_TYPE::PLAY);
 	}
+
+	if (InputMgr::GetKeyDown(Keyboard::Space))
+	{
+		SceneManager::GetInstance()->LoadScene(SCENE_TYPE::GAME_OVER);
+	}
 }
 
 void UpgradeScene::Draw(RenderWindow& window)
