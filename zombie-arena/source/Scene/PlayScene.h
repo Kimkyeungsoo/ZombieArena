@@ -1,6 +1,5 @@
 #pragma once
 #include "Scene.h"
-#include "..\plyer\Player.h"
 #include <list>
 #include <vector>
 
@@ -11,7 +10,6 @@ class PlayScene : public Scene
 private:
 	IntRect arena;
 	std::list<Pickup*> items;
-	Player player;
 	std::vector<Zombie*> zombies;
 
 	Texture textureBackground;

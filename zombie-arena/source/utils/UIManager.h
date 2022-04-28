@@ -47,6 +47,7 @@ public:
 
 	void Init_PlayScene();
 	void Draw_PlayScene(RenderWindow& window);
+	void Update_PlayScene();
 
 	void Init_UpgradeScene();
 	void Draw_UpgradeScene(RenderWindow& window);

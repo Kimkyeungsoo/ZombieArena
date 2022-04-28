@@ -53,18 +53,6 @@ void Pickup::Spawn(bool spawn)
 
 int Pickup::GotIt()
 {
-	switch (type)
-	{
-	case PickupTypes::Ammo:
-		std::cout << "Ammo" << std::endl;
-		break;
-	case PickupTypes::Health:
-		std::cout << "Health" << std::endl;
-		break;
-	default:
-		break;
-	}
-	// 충돌 처리
 	return value;
 }
 

@@ -10,7 +10,6 @@
 Player::Player()
 	: speed(START_SPEED), health(START_HEALTH), maxHealth(START_HEALTH), immuneMs(START_IMMUNE_MS), arena(), resolution(), tileSize(0), textureFileName("graphics/player.png"), distanceToMuzzle(45.f), damage(START_DAMAGE)
 {
-	//texture.loadFromFile("graphics/player.png");
 	sprite.setTexture(TextureHolder::GetTexture(textureFileName));
 	Utils::SetOrigin(sprite, Pivots::CC);
 
@@ -50,9 +49,6 @@ void Player::Shoot(Vector2f dir)
 	}
 	// 발사 시 마다 장탄수 감소
 	haveAmmo--;
-
-
-
 
 	// 가져오고 초기화 발사 까지
 	dir = Utils::Normalize(dir);
@@ -175,7 +171,7 @@ void Player::Update(float dt, IntRect arena)
 	/**********************
 	* 총알
 	***********************/
-	if (InputMgr::GetMouseButtonDown(Mouse::Button::Left))
+	if (InputMgr::GetMouseButtonDown(Mouse::Button::Left) && !Reloading)
 	{
 		Shoot(Vector2f(mouseDir.x, mouseDir.y));
 	}
@@ -190,12 +186,11 @@ void Player::Update(float dt, IntRect arena)
 	if (Reloading)
 	{
 		timer -= dt;
-		if (timer < 0)
+		if (timer < 0.f)
 		{
-			Reloading = false;
 			Reload();
-			// timer 초기화
-			timer = 3;
+			Reloading = false;
+			timer = 2.f;
 		}
 	}
 
@@ -227,7 +222,24 @@ bool Player::UpdateCollision(const std::list<Pickup*> items)
 	{
 		if (bounds.intersects(item->GetGlobalBound()))
 		{
-			item->GotIt();
+			switch (item->GetType())
+			{
+			case PickupTypes::Ammo:
+				haveAmmo += item->GotIt();
+				break;
+			case PickupTypes::Health:
+				health += item->GotIt();
+				break;
+			default:
+				break;
+			}
+			//item->GotIt();
+
+			//아이템 먹었을 때 사라져야 함
+			//1. 안보이게만 하고, 
+			//2. 아이템이 획득됐었는지 체크를 함. ???
+			//3. 게임 끝날 때 다 사라짐???
+			//4. 한번만 먹게 되어야 함
 		}
 		isCollided = true;
 	}
@@ -286,6 +298,17 @@ void Player::Reload()
 	haveAmmo = totalAmmo + reloadedAmmo;
 }
 
+int Player::GetHaveAmmo()
+{
+	return haveAmmo;
+}
 
+void Player::SetHaveAmmo(int ammo)
+{
+	haveAmmo = ammo;
+}
 
-
+int Player::GetTotalAmmo()
+{
+	return totalAmmo;
+}
