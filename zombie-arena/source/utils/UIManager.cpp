@@ -240,22 +240,25 @@ void UIManager::Update_UpgradeScene()
 			{
 				switch (i)
 				{
-				case 0:
-					isChooseUpgrade = true;
+				case RATE_OF_FIRE:
 					break;
-				case 1:
+				case CLIP_SIZE:
 					GameLevelData::GetInstance()->UpgradeClipSize();
-					isChooseUpgrade = true;
 					break;
-				case 2:
+				case MAX_HEALTH:
 					Player::GetInstance()->UpgradeMaxHealth();
-					isChooseUpgrade = true;
 					break;
-				case 3:
+				case SPEED:
 					Player::GetInstance()->UpgradeSpeed();
-					isChooseUpgrade = true;
+					break;
+				case HP_LEVEL:
+					GameLevelData::GetInstance()->Upgrade_HP_level();
+					break;
+				case AP_LEVEL:
+					GameLevelData::GetInstance()->Upgrade_AP_level();
 					break;
 				}
+				isChooseUpgrade = true;
 			}
 		}
 		else

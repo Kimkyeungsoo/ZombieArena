@@ -4,6 +4,13 @@
 #include "Singleton.h"
 #include <vector>
 
+#define RATE_OF_FIRE 0
+#define CLIP_SIZE 1
+#define MAX_HEALTH 2
+#define SPEED 3
+#define HP_LEVEL 4
+#define AP_LEVEL 5
+
 using namespace sf;
 
 class UIManager : public Singleton<UIManager>

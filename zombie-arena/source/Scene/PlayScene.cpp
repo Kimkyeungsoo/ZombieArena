@@ -245,12 +245,17 @@ void PlayScene::AddItems()
 	// 여기서 새로 동적할당을 매번하고,
 	// items에 넣어주는 식으로 간다면
 	// 이 함수가 호출될 때마다 아이템이 추가로 배치될 수 있음
-	Pickup* ammoPickup = new Pickup(PickupTypes::Ammo);
-	Pickup* healthPickup = new Pickup(PickupTypes::Health);
+	for (int i = 0; i < GameLevelData::GetInstance()->GetLevel_AP(); ++i)
+	{
+		Pickup* ammoPickup = new Pickup(PickupTypes::Ammo);
+		ammoPickup->SetArena(arena);
+		items.push_back(ammoPickup);
+	}
 
-	ammoPickup->SetArena(arena);
-	healthPickup->SetArena(arena);
-
-	items.push_back(ammoPickup);
-	items.push_back(healthPickup);
+	for (int i = 0; i < GameLevelData::GetInstance()->GetLevel_HP(); ++i)
+	{
+		Pickup* healthPickup = new Pickup(PickupTypes::Health);
+		healthPickup->SetArena(arena);
+		items.push_back(healthPickup);
+	}
 }

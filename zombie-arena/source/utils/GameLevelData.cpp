@@ -25,6 +25,26 @@ int GameLevelData::GetClipSize()
     return level_ClipSize;
 }
 
+int GameLevelData::GetLevel_HP()
+{
+    return level_Health_Pickup;
+}
+
+int GameLevelData::GetLevel_AP()
+{
+    return level_Ammo_Pickup;
+}
+
+float GameLevelData::GetSpawnTime_HP()
+{
+    return spawnTime_HP;
+}
+
+float GameLevelData::GetSpawnTime_AP()
+{
+    return spawnTime_AP;
+}
+
 void GameLevelData::SetDefaultData()
 {
     countZombies = 10;
@@ -68,4 +88,16 @@ void GameLevelData::SetHighScore(int highScore)
 void GameLevelData::UpgradeClipSize()
 {
     level_ClipSize++;
+}
+
+void GameLevelData::Upgrade_HP_level()
+{
+    spawnTime_HP++;
+    level_Health_Pickup++;
+}
+
+void GameLevelData::Upgrade_AP_level()
+{
+    spawnTime_AP++;
+    level_Ammo_Pickup++;
 }
