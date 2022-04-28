@@ -27,10 +27,6 @@ void UpgradeScene::Update(float dt)
 	// 그리고 clear 됐기 때문에 여기서든 SceneManager든 다른 곳에서든
 	// 게임의 난이도(나오는 좀비의 수 같은거라던지..)를 변경시켜줄 수 있어야 함
 	// 테스트용 백스페이스 씬전환
-	if (isChooseUpgrade || InputMgr::GetKeyDown(Keyboard::Backspace))
-	{
-		SceneManager::GetInstance()->LoadScene(SCENE_TYPE::PLAY);
-	}
 
 	if (InputMgr::GetKeyDown(Keyboard::Space))
 	{

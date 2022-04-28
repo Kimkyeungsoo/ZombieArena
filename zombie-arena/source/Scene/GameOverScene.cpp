@@ -2,6 +2,7 @@
 #include "..\utils\InputMgr.h"
 #include "..\utils\TextureHolder.h"
 #include "..\utils\SceneManager.h"
+#include "..\plyer\Player.h"
 
 GameOverScene::GameOverScene()
 {
@@ -24,6 +25,7 @@ void GameOverScene::Update(float dt)
 {
 	if (InputMgr::GetKeyDown(Keyboard::Enter))
 	{
+		Player::GetInstance()->DestroyInstance();
 		SceneManager::GetInstance()->LoadScene(SCENE_TYPE::TITLE);
 	}
 }

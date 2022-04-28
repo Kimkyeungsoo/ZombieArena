@@ -6,6 +6,7 @@
 #include <iostream>
 #include <algorithm>
 #include "../utils/Pickup.h"
+#include "..\utils\SceneManager.h"
 
 Player::Player()
 	: speed(START_SPEED), health(START_HEALTH), maxHealth(START_HEALTH), immuneMs(START_IMMUNE_MS), arena(), resolution(), tileSize(0), textureFileName("graphics/player.png"), distanceToMuzzle(45.f), damage(START_DAMAGE)
@@ -291,6 +292,15 @@ void Player::UpgradeSpeed()
 void Player::UpgradeMaxHealth()
 {
 	maxHealth += START_HEALTH * 0.2;
+}
+
+void Player::UpgradeClipSize()
+{
+	level_Reload++;
+}
+
+void Player::UpgradeRateOfFire()
+{
 }
 
 void Player::Reload()

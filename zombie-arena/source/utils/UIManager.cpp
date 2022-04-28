@@ -174,6 +174,7 @@ void UIManager::Draw_UpgradeScene(RenderWindow& window)
 
 void UIManager::Update_UpgradeScene()
 {
+	bool isChooseUpgrade = false;
 	auto pos = InputMgr::GetMousePosition();
 
 	for (int i = 0; i < 6; ++i)
@@ -181,6 +182,29 @@ void UIManager::Update_UpgradeScene()
 		if (textUpgrades[i].getGlobalBounds().contains(pos.x, pos.y))
 		{
 			textUpgrades[i].setFillColor(Color::Red);
+			// 클릭했을 때
+			if (InputMgr::GetMouseButtonDown(Mouse::Button::Left))
+			{
+				switch (i)
+				{
+				case 0:
+					Player::GetInstance()->UpgradeRateOfFire();
+					isChooseUpgrade = true;
+					break;
+				case 1:
+					Player::GetInstance()->UpgradeClipSize();
+					isChooseUpgrade = true;
+					break;
+				case 2:
+					Player::GetInstance()->UpgradeMaxHealth();
+					isChooseUpgrade = true;
+					break;
+				case 3:
+					Player::GetInstance()->UpgradeSpeed();
+					isChooseUpgrade = true;
+					break;
+				}
+			}
 		}
 		else
 		{
@@ -188,7 +212,8 @@ void UIManager::Update_UpgradeScene()
 		}
 	}
 
-	// 클릭했을 때
+	if(isChooseUpgrade)
+		SceneManager::GetInstance()->LoadScene(SCENE_TYPE::PLAY);
 }
 
 void UIManager::Init_GameOverScene()
