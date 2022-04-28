@@ -26,6 +26,8 @@ private:
 
 	bool spawned;
 	float timer;
+
+	bool isgetIt;
 public:
 	Pickup(PickupTypes type);
 
@@ -41,5 +43,6 @@ public:
 	PickupTypes GetType();
 
 	int GetAmmo() const;
+	bool GetIsGetIt() const;
 };
 

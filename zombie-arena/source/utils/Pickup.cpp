@@ -4,7 +4,7 @@
 #include <iostream>
 
 Pickup::Pickup(PickupTypes type)
-	: type(type)
+	: type(type), isgetIt(false)
 {
 	std::string textureId;
 	switch (this->type)
@@ -44,6 +44,7 @@ void Pickup::Spawn(bool spawn)
 		int y = Utils::Random(arena.top, arena.top + arena.height);
 
 		sprite.setPosition(Vector2f(x, y));
+		isgetIt = true;
 	}
 	else
 	{
@@ -53,6 +54,7 @@ void Pickup::Spawn(bool spawn)
 
 int Pickup::GotIt()
 {
+	isgetIt = false;
 	return value;
 }
 
@@ -84,4 +86,9 @@ PickupTypes Pickup::GetType()
 int Pickup::GetAmmo() const
 {
 	return AMMO_START_VALUE;
+}
+
+bool Pickup::GetIsGetIt() const
+{
+	return isgetIt;
 }
