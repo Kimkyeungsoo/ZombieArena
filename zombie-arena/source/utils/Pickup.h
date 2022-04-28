@@ -39,5 +39,7 @@ public:
 	Sprite GetSprite();
 	FloatRect GetGlobalBound();
 	PickupTypes GetType();
+
+	int GetAmmo() const;
 };
 
