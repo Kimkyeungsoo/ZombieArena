@@ -40,8 +40,8 @@ void Pickup::Spawn(bool spawn)
 	{
 		timer = START_SENONDS_FOR_LIVE;
 
-		int x = Utils::Random(arena.left, arena.left + arena.width);
-		int y = Utils::Random(arena.top, arena.top + arena.height);
+		int x = Utils::Random(arena.left + 50, arena.left + arena.width - 50);
+		int y = Utils::Random(arena.top + 50, arena.top + arena.height - 50);
 
 		sprite.setPosition(Vector2f(x, y));
 		isgetIt = true;
