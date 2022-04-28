@@ -8,7 +8,7 @@ std::vector<ZombieInfo> Zombie::zombieInfo;
 bool Zombie::isInitInfo = false;
 
 Zombie::Zombie()
-	: alive(true), health(0), speed(0), zombieType(ZombieTypes::BLOATER)
+	: alive(true), health(0), speed(0), zombieType(ZombieTypes::BLOATER), isTime(true), time(3.f)
 {
 	if (!isInitInfo)
 	{
@@ -45,12 +45,21 @@ bool Zombie::OnHitted()
 {
 	Player player;
 	health -= player.GetDamage();
+	if (health <= 0)
+	{
+		SetAlive(false);
+	}
 	return false;
 }
 
 bool Zombie::IsAlive()
 {
 	return alive;
+}
+
+void Zombie::SetAlive(bool _alive)
+{
+	alive = _alive;
 }
 
 void Zombie::Spawn(float x, float y, ZombieTypes type)
@@ -81,8 +90,8 @@ void Zombie::Update(float dt, Vector2f playerPosition, IntRect arena)
 	Vector2f dir(x, y);
 
 	dir = Utils::Normalize(dir);
-	
-	
+
+
 	position += dir * speed * dt;	// v = dt
 	/**********************************************
 	* 외곽 벽 충돌 처리
@@ -97,11 +106,25 @@ void Zombie::Update(float dt, Vector2f playerPosition, IntRect arena)
 	float radian = atan2(dir.y, dir.x);
 	float degree = radian * 180.f / 3.141592f;
 	sprite.setRotation(degree);
+
+	if (!alive && !blood.GetActive())
+	{
+		blood.SetPosition(position);
+		blood.SetActive(true);
+	}
+	if (!alive)
+	{
+		time -= dt;
+		if (time <= 0.f)
+		{
+			isTime = false;
+		}
+	}
 }
 
 bool Zombie::UpdateCollision(Time time, Player& player)
 {
-	if (sprite.getGlobalBounds().intersects(player.GetGobalBound()))
+	if (sprite.getGlobalBounds().intersects(player.GetGobalBound()) && alive)
 	{
 		return player.OnHitted(time);
 	}
@@ -122,4 +145,14 @@ Sprite Zombie::GetSprite()
 int Zombie::GetHealth() const
 {
 	return health;
+}
+
+Blood& Zombie::GetBlood()
+{
+	return blood;
+}
+
+bool Zombie::IsTime()
+{
+	return isTime;
 }
