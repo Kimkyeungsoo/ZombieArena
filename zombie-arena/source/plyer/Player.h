@@ -44,6 +44,15 @@ private:
 	std::list<Bullet*> unuseBullets;	// 사용하지 않은 불릿
 	std::list<Bullet*> useBullets;	//	사용중인 불릿
 
+
+	int totalAmmo;	//전체 탄 수
+	int haveAmmo;	//현재 가지고 있는 탄 수
+	int reloadedAmmo; //재장전된 탄 수
+	int level_Reload = 0; //리로드 강화한 횟수
+	int timer = 3;
+
+	bool Reloading = false;
+
 	float distanceToMuzzle;
 public:
 	Player();
@@ -73,4 +82,10 @@ public:
 
 	void UpgradeSpeed();
 	void UpgradeMaxHealth();
+
+
+	void Reload();
+
+
+
 };

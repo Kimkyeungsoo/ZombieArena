@@ -18,6 +18,11 @@ Player::Player()
 	{
 		unuseBullets.push_back(new Bullet());
 	}
+
+
+	totalAmmo = 30;
+	haveAmmo = totalAmmo;
+	reloadedAmmo = 12 * level_Reload;
 }
 
 Player::~Player()
@@ -36,6 +41,19 @@ Player::~Player()
 
 void Player::Shoot(Vector2f dir)
 {
+/**********************
+* 재장전
+***********************/
+	if (haveAmmo == 0)
+	{
+		return;
+	}
+	// 발사 시 마다 장탄수 감소
+	haveAmmo--;
+
+
+
+
 	// 가져오고 초기화 발사 까지
 	dir = Utils::Normalize(dir);
 
@@ -162,6 +180,27 @@ void Player::Update(float dt, IntRect arena)
 		Shoot(Vector2f(mouseDir.x, mouseDir.y));
 	}
 
+/**********************
+* 재장전
+***********************/
+	if (InputMgr::GetKeyDown(Keyboard::R))
+	{
+		Reloading = true;
+	}
+	if (Reloading)
+	{
+		timer -= dt;
+		if (timer < 0)
+		{
+			Reloading = false;
+			Reload();
+			// timer 초기화
+			timer = 3;
+		}
+	}
+
+
+
 	auto it = useBullets.begin();
 	while (it != useBullets.end())
 	{
@@ -241,3 +280,12 @@ void Player::UpgradeMaxHealth()
 {
 	maxHealth += START_HEALTH * 0.2;
 }
+
+void Player::Reload()
+{
+	haveAmmo = totalAmmo + reloadedAmmo;
+}
+
+
+
+
