@@ -87,8 +87,6 @@ void UIManager::Draw_TitleScene(RenderWindow& window)
 void UIManager::Init_PlayScene()
 {
 	int score = 0;
-	int haveAmmo = 0;
-	int totalAmmo = 30;
 	
 	textScore.setString("SCORE: ");
 	textScore.setPosition(20.f, 0.f);
@@ -102,10 +100,6 @@ void UIManager::Init_PlayScene()
 	textZombieCount.setFillColor(Color::White);
 	textZombieCount.setFont(fontZombiecontrol);
 
-	stringstream ssAmmo;
-	ssAmmo << haveAmmo << "/" << totalAmmo;
-	textAmmo.setString(ssAmmo.str());
-	
 	textAmmo.setPosition(200.f, 980.f);
 	textAmmo.setCharacterSize(45);
 	textAmmo.setFillColor(Color::White);
@@ -125,6 +119,16 @@ void UIManager::Draw_PlayScene(RenderWindow& window)
 	window.draw(textZombieCount);
 	window.draw(textAmmo);
 	// PlayScene에서 사용되는 UI들 Draw
+}
+
+void UIManager::Update_PlayScene()
+{
+	int haveAmmo = Player::GetInstance()->GetHaveAmmo();
+	int totalAmmo = Player::GetInstance()->GetTotalAmmo();
+
+	stringstream ssAmmo;
+	ssAmmo << haveAmmo << "/" << totalAmmo;
+	textAmmo.setString(ssAmmo.str());
 }
 
 void UIManager::Init_UpgradeScene()

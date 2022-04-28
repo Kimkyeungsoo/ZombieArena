@@ -2,6 +2,7 @@
 #pragma once
 
 #include "SFML/Graphics.hpp"
+#include "..\utils\Singleton.h"
 #include <string>
 #include "../bullet/Bullet.h"
 #include <list>
@@ -9,10 +10,8 @@
 using namespace sf;
 
 class Pickup;
-
-class Player
+class Player : public Singleton<Player>
 {
-
 private:
 	const float START_SPEED = 300.f;
 	const int START_HEALTH = 100;
@@ -49,7 +48,7 @@ private:
 	int haveAmmo;	//현재 가지고 있는 탄 수
 	int reloadedAmmo; //재장전된 탄 수
 	int level_Reload = 0; //리로드 강화한 횟수
-	int timer = 3;
+	float timer = 2.f;
 
 	bool Reloading = false;
 
@@ -83,9 +82,8 @@ public:
 	void UpgradeSpeed();
 	void UpgradeMaxHealth();
 
-
 	void Reload();
-
-
-
+	int GetHaveAmmo();
+	void SetHaveAmmo(int ammo);
+	int GetTotalAmmo();
 };

@@ -7,6 +7,8 @@
 #include "..\utils\InputMgr.h"
 #include "..\utils\SceneManager.h"
 #include "..\utils\ViewManager.h"
+#include "..\plyer\Player.h"
+#include "..\utils\UIManager.h"
 
 PlayScene::PlayScene()
 	:countZombies(10)
@@ -26,8 +28,8 @@ void PlayScene::Init()
 	SetArenaSize(800, 800);
 	AddItems();
 
-	player.Spawn(arena, ViewManager::GetInstance()->GetResolution(), 0);
-
+	Player::GetInstance()->Spawn(arena, ViewManager::GetInstance()->GetResolution(), 0);
+	Player::GetInstance()->SetHaveAmmo(Player::GetInstance()->GetTotalAmmo());
 	CreateZombies(zombies, countZombies, arena);
 	CreateBackground(tileMap, arena);
 }
@@ -39,7 +41,7 @@ void PlayScene::Update(float dt)
 	
 	for (auto zombie : zombies)
 	{
-		zombie->Update(dt, player.GetPosition(), arena);
+		zombie->Update(dt, Player::GetInstance()->GetPosition(), arena);
 	}
 
 	for (auto item : items)
@@ -47,11 +49,13 @@ void PlayScene::Update(float dt)
 		item->Update(dt);
 	}
 
-	player.Update(dt, arena);
+	Player::GetInstance()->Update(dt, arena);
 	spriteCrosshair.setPosition(InputMgr::GetMouseWorldPosition());
-	ViewManager::GetInstance()->GetMainView().setCenter(player.GetPosition());
+	ViewManager::GetInstance()->GetMainView().setCenter(Player::GetInstance()->GetPosition());
 	
 	CollisionCheck();
+
+	UIManager::GetInstance()->Update_PlayScene();
 
 	// 씬넘어가기 위한 테스트용
 	if (InputMgr::GetKeyDown(Keyboard::Space))
@@ -85,7 +89,7 @@ void PlayScene::Draw(RenderWindow& window)
 		}
 	}
 
-	player.Draw(window);
+	Player::GetInstance()->Draw(window);
 
 	window.draw(spriteCrosshair);
 }
@@ -207,17 +211,17 @@ void PlayScene::SetArenaSize(int x, int y)
 
 void PlayScene::CollisionCheck()
 {
-	player.UpdateCollision(zombies);
+	Player::GetInstance()->UpdateCollision(zombies);
 
 	for (auto zombie : zombies)
 	{
-		if (zombie->UpdateCollision(playTime, player))
+		if (zombie->UpdateCollision(playTime, *Player::GetInstance()))
 		{
 			break;
 		}
 	}
 
-	player.UpdateCollision(items);
+	Player::GetInstance()->UpdateCollision(items);
 }
 
 void PlayScene::AddItems()
