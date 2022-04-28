@@ -4,6 +4,7 @@
 #include "utils/TextureHolder.h"
 #include "utils/ViewManager.h"
 #include "utils/SceneManager.h"
+#include "sound/SoundManager.h"
 
 using namespace std;
 using namespace sf;
@@ -20,6 +21,7 @@ int main()
 
 	SceneManager::GetInstance()->LoadScene(SCENE_TYPE::TITLE);
 	InputMgr::Init();
+	SoundManager::GetInstance()->Init();
 
 	Clock clock;
 	while (window.isOpen())

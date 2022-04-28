@@ -7,6 +7,7 @@
 #include <algorithm>
 #include "../utils/Pickup.h"
 #include "..\utils\SceneManager.h"
+#include "../sound/SoundManager.h"
 
 Player::Player()
 	: speed(START_SPEED), health(START_HEALTH), maxHealth(START_HEALTH), immuneMs(START_IMMUNE_MS), arena(), resolution(), tileSize(0), textureFileName("graphics/player.png"), distanceToMuzzle(45.f), damage(START_DAMAGE)
@@ -41,13 +42,15 @@ Player::~Player()
 
 void Player::Shoot(Vector2f dir)
 {
-/**********************
-* 재장전
-***********************/
+	/**********************
+	* 재장전
+	***********************/
 	if (haveAmmo == 0)
 	{
+		SoundManager::GetInstance()->reloadFailedSound->play();
 		return;
 	}
+	SoundManager::GetInstance()->hitSound->play();
 	// 발사 시 마다 장탄수 감소
 	haveAmmo--;
 
@@ -177,9 +180,9 @@ void Player::Update(float dt, IntRect arena)
 		Shoot(Vector2f(mouseDir.x, mouseDir.y));
 	}
 
-/**********************
-* 재장전
-***********************/
+	/**********************
+	* 재장전
+	***********************/
 	if (InputMgr::GetKeyDown(Keyboard::R))
 	{
 		Reloading = true;
@@ -189,6 +192,8 @@ void Player::Update(float dt, IntRect arena)
 		timer -= dt;
 		if (timer < 0.f)
 		{
+			SoundManager::GetInstance()->reloadFailedSound->play();
+			SoundManager::GetInstance()->reloadSound->play();
 			Reload();
 			Reloading = false;
 			timer = 2.f;

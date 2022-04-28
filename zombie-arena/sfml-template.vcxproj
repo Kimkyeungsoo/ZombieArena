@@ -151,6 +151,7 @@
     <ClCompile Include="source\Scene\GameOverScene.cpp" />
     <ClCompile Include="source\Scene\PlayScene.cpp" />
     <ClCompile Include="source\Scene\Scene.cpp" />
+    <ClCompile Include="source\sound\SoundManager.cpp" />
     <ClCompile Include="source\utils\GameLevelData.cpp" />
     <ClCompile Include="source\utils\SceneManager.cpp" />
     <ClCompile Include="source\bullet\Bullet.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="source\Scene\GameOverScene.h" />
     <ClInclude Include="source\Scene\PlayScene.h" />
     <ClInclude Include="source\Scene\Scene.h" />
+    <ClInclude Include="source\sound\SoundManager.h" />
     <ClInclude Include="source\utils\GameLevelData.h" />
     <ClInclude Include="source\utils\SceneManager.h" />
     <ClInclude Include="source\bullet\Bullet.h" />

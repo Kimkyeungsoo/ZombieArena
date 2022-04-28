@@ -19,6 +19,7 @@
     <ClCompile Include="source\utils\UIManager.cpp" />
     <ClCompile Include="source\utils\ViewManager.cpp" />
     <ClCompile Include="source\utils\GameLevelData.cpp" />
+    <ClCompile Include="source\sound\SoundManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="source\Scene\GameOverScene.h" />
@@ -39,5 +40,6 @@
     <ClInclude Include="source\utils\UIManager.h" />
     <ClInclude Include="source\utils\ViewManager.h" />
     <ClInclude Include="source\utils\GameLevelData.h" />
+    <ClInclude Include="source\sound\SoundManager.h" />
   </ItemGroup>
 </Project>

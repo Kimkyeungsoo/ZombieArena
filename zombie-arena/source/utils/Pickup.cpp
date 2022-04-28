@@ -2,6 +2,7 @@
 #include "TextureHolder.h"
 #include "Utils.h"
 #include <iostream>
+#include "../sound/SoundManager.h"
 
 Pickup::Pickup(PickupTypes type)
 	: type(type), isgetIt(false)
@@ -54,6 +55,7 @@ void Pickup::Spawn(bool spawn)
 
 int Pickup::GotIt()
 {
+	SoundManager::GetInstance()->pickupSound->play();
 	isgetIt = false;
 	return value;
 }
