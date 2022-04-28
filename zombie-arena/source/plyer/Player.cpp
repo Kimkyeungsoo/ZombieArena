@@ -8,6 +8,7 @@
 #include "../utils/Pickup.h"
 #include "../utils/SceneManager.h"
 #include "../utils/GameLevelData.h"
+#include "../utils/ViewManager.h"
 
 Player::Player()
 	: speed(START_SPEED), health(START_HEALTH), maxHealth(START_HEALTH), immuneMs(START_IMMUNE_MS), arena(), resolution(), tileSize(0), textureFileName("graphics/player.png"), distanceToMuzzle(45.f), damage(START_DAMAGE)
@@ -81,6 +82,7 @@ void Player::Spawn(IntRect arena, Vector2i res, int tileSize)
 
 bool Player::OnHitted(Time timeHit)
 {
+	ViewManager::GetInstance()->CameraShake(timeHit.asSeconds());
 	if (timeHit.asMilliseconds() - lastHit.asMilliseconds() > immuneMs)
 	{
 		std::cout << timeHit.asSeconds() << std::endl;
@@ -213,6 +215,8 @@ void Player::Update(float dt, IntRect arena)
 			++it;
 		}
 	}
+
+	ViewManager::GetInstance()->turnoffDimmed();
 }
 
 bool Player::UpdateCollision(const std::list<Pickup*> items)

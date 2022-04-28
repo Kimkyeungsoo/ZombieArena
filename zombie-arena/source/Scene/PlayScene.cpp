@@ -62,7 +62,6 @@ void PlayScene::Update(float dt)
 	CollisionCheck();
 
 	UIManager::GetInstance()->Update_PlayScene();
-
 	
 	if (GameLevelData::GetInstance()->GetCountZombies() == 0)
 	{

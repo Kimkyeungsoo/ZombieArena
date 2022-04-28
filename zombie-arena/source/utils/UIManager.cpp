@@ -154,6 +154,7 @@ void UIManager::Init_PlayScene()
 void UIManager::Draw_PlayScene(RenderWindow& window)
 {
 	window.setView(ViewManager::GetInstance()->GetUiView());
+	ViewManager::GetInstance()->draw(window);
 	window.draw(textHighScore);
 	window.draw(textHighScoreNumber);
 	window.draw(textScore);

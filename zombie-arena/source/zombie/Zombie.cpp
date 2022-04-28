@@ -129,7 +129,6 @@ bool Zombie::UpdateCollision(Time time, Player& player)
 {
 	if (sprite.getGlobalBounds().intersects(player.GetGobalBound()) && alive)
 	{
-		ViewManager::GetInstance()->CameraShake(time.asSeconds());
 		return player.OnHitted(time);
 	}
 	return false;
