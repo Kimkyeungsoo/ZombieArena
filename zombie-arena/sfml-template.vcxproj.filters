@@ -43,6 +43,11 @@
     </ClCompile>
     <ClCompile Include="source\zombie\Blood.cpp">
       <Filter>Zombie</Filter>
+    <ClCompile Include="source\utils\SceneManager.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="source\utils\Scene.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +74,11 @@
     </ClInclude>
     <ClInclude Include="source\zombie\Blood.h">
       <Filter>Zombie</Filter>
+    <ClInclude Include="source\utils\SceneManager.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="source\utils\Scene.h">
+      <Filter>Utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
