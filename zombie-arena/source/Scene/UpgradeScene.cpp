@@ -2,6 +2,7 @@
 #include "..\utils\TextureHolder.h"
 #include "..\utils\InputMgr.h"
 #include "..\utils\SceneManager.h"
+#include "..\utils\UIManager.h"
 
 UpgradeScene::UpgradeScene()
 	:isChooseUpgrade(false)
@@ -35,6 +36,8 @@ void UpgradeScene::Update(float dt)
 	{
 		SceneManager::GetInstance()->LoadScene(SCENE_TYPE::GAME_OVER);
 	}
+
+	UIManager::GetInstance()->Update_UpgradeScene();
 }
 
 void UpgradeScene::Draw(RenderWindow& window)
