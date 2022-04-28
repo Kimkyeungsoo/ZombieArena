@@ -1,5 +1,8 @@
 #include "UIManager.h"
-
+#include "TextureHolder.h"
+#include "ViewManager.h"
+#include "../plyer/Player.h"
+#include <sstream>
 
 void UIManager::Init(SCENE_TYPE type)
 {
@@ -83,11 +86,44 @@ void UIManager::Draw_TitleScene(RenderWindow& window)
 
 void UIManager::Init_PlayScene()
 {
+	int score = 0;
+	int haveAmmo = 0;
+	int totalAmmo = 30;
+	
+	textScore.setString("SCORE: ");
+	textScore.setPosition(20.f, 0.f);
+	textScore.setCharacterSize(45);
+	textScore.setFillColor(Color::White);
+	textScore.setFont(fontZombiecontrol);
+
+	textZombieCount.setString("ZOMBIES: ");
+	textZombieCount.setPosition(1500.f, 980.f);
+	textZombieCount.setCharacterSize(45);
+	textZombieCount.setFillColor(Color::White);
+	textZombieCount.setFont(fontZombiecontrol);
+
+	stringstream ssAmmo;
+	ssAmmo << haveAmmo << "/" << totalAmmo;
+	textAmmo.setString(ssAmmo.str());
+	
+	textAmmo.setPosition(200.f, 980.f);
+	textAmmo.setCharacterSize(45);
+	textAmmo.setFillColor(Color::White);
+	textAmmo.setFont(fontZombiecontrol);
+
+	Texture textureAmmoIcon = TextureHolder::GetTexture("graphics/ammo_icon.png");
+	spriteAmmoIcon.setTexture(textureAmmoIcon);
+	spriteAmmoIcon.setPosition(20, 980);
+		
 	// PlayScene에서 사용될 UI 초기설정 등록
 }
 
 void UIManager::Draw_PlayScene(RenderWindow& window)
 {
+	window.setView(ViewManager::GetInstance()->GetUiView());
+	window.draw(textScore);
+	window.draw(textZombieCount);
+	window.draw(textAmmo);
 	// PlayScene에서 사용되는 UI들 Draw
 }
 
