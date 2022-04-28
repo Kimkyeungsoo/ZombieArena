@@ -6,7 +6,8 @@
 #include <iostream>
 #include <algorithm>
 #include "../utils/Pickup.h"
-#include "..\utils\SceneManager.h"
+#include "../utils/SceneManager.h"
+#include "../utils/GameLevelData.h"
 
 Player::Player()
 	: speed(START_SPEED), health(START_HEALTH), maxHealth(START_HEALTH), immuneMs(START_IMMUNE_MS), arena(), resolution(), tileSize(0), textureFileName("graphics/player.png"), distanceToMuzzle(45.f), damage(START_DAMAGE)
@@ -22,7 +23,6 @@ Player::Player()
 
 	totalAmmo = 30;
 	haveAmmo = totalAmmo;
-	reloadedAmmo = 12 * level_Reload;
 }
 
 Player::~Player()
@@ -240,13 +240,6 @@ bool Player::UpdateCollision(const std::list<Pickup*> items)
 			default:
 				break;
 			}
-			//item->GotIt();
-
-			//아이템 먹었을 때 사라져야 함
-			//1. 안보이게만 하고, 
-			//2. 아이템이 획득됐었는지 체크를 함. ???
-			//3. 게임 끝날 때 다 사라짐???
-			//4. 한번만 먹게 되어야 함
 		}
 		isCollided = true;
 	}
@@ -298,20 +291,12 @@ void Player::UpgradeSpeed()
 void Player::UpgradeMaxHealth()
 {
 	maxHealth += START_HEALTH * 0.2;
-}
-
-void Player::UpgradeClipSize()
-{
-	level_Reload++;
-}
-
-void Player::UpgradeRateOfFire()
-{
+	health = maxHealth;
 }
 
 void Player::Reload()
 {
-	haveAmmo = totalAmmo + reloadedAmmo;
+	haveAmmo = totalAmmo + (RELOAD_AMMO * GameLevelData::GetInstance()->GetClipSize());
 }
 
 int Player::GetHaveAmmo()

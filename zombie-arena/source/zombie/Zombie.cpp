@@ -3,6 +3,7 @@
 #include "../utils/Utils.h"
 #include <iostream>
 #include "../plyer/Player.h"
+#include "../utils/GameLevelData.h"
 
 std::vector<ZombieInfo> Zombie::zombieInfo;
 bool Zombie::isInitInfo = false;
@@ -46,6 +47,7 @@ bool Zombie::OnHitted()
 	health -= Player::GetInstance()->GetDamage();
 	if (health <= 0)
 	{
+		GameLevelData::GetInstance()->AddScore(1);
 		SetAlive(false);
 	}
 	return false;

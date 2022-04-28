@@ -9,6 +9,7 @@
 #include "..\utils\ViewManager.h"
 #include "..\plyer\Player.h"
 #include "..\utils\UIManager.h"
+#include "..\utils\GameLevelData.h"
 
 PlayScene::PlayScene()
 	:countZombies(10)
@@ -42,6 +43,11 @@ void PlayScene::Update(float dt)
 	for (auto zombie : zombies)
 	{
 		zombie->Update(dt, Player::GetInstance()->GetPosition(), arena);
+	}
+
+	if (GameLevelData::GetInstance()->GetScore() >= GameLevelData::GetInstance()->GetHighScore())
+	{
+		GameLevelData::GetInstance()->SetHighScore(GameLevelData::GetInstance()->GetScore());
 	}
 
 	for (auto item : items)

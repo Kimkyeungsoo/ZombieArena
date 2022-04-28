@@ -7,6 +7,8 @@
 #include "../bullet/Bullet.h"
 #include <list>
 
+#define RELOAD_AMMO 12
+
 using namespace sf;
 
 class Pickup;
@@ -46,8 +48,6 @@ private:
 
 	int totalAmmo;	//전체 탄 수
 	int haveAmmo;	//현재 가지고 있는 탄 수
-	int reloadedAmmo; //재장전된 탄 수
-	int level_Reload = 0; //리로드 강화한 횟수
 	float timer = 2.f;
 
 	bool Reloading = false;
@@ -81,8 +81,6 @@ public:
 
 	void UpgradeSpeed();
 	void UpgradeMaxHealth();
-	void UpgradeClipSize();
-	void UpgradeRateOfFire();
 
 	void Reload();
 	int GetHaveAmmo();

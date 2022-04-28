@@ -16,8 +16,14 @@ private:
 
 	Text textHighScoreNumber;
 	Text textScore;
+	Text textScoreNumber;
+	Text textWave;
+	Text textWaveNumber;
 	Text textZombieCount;
+	Text textZombieCountNumber;
+	Text textHealth;
 	Text textAmmo;
+	Texture textureAmmoIcon;
 	Sprite spriteAmmoIcon;
 
 	// 지금 내 코드에서 list가 유리한지 vector가 유리한지?
