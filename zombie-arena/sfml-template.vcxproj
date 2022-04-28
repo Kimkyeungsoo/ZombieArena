@@ -159,6 +159,7 @@
     <ClCompile Include="source\utils\TextureHolder.cpp" />
     <ClCompile Include="source\utils\Utils.cpp" />
     <ClCompile Include="source\main.cpp" />
+    <ClCompile Include="source\zombie\Blood.cpp" />
     <ClCompile Include="source\zombie\Zombie.cpp" />
     <ClCompile Include="source\Scene\TitleScene.cpp" />
     <ClCompile Include="source\Scene\UpgradeScene.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="source\utils\Singleton.h" />
     <ClInclude Include="source\utils\TextureHolder.h" />
     <ClInclude Include="source\utils\Utils.h" />
+    <ClInclude Include="source\zombie\Blood.h" />
     <ClInclude Include="source\zombie\Zombie.h" />
     <ClInclude Include="source\Scene\TitleScene.h" />
     <ClInclude Include="source\Scene\UpgradeScene.h" />

@@ -49,6 +49,7 @@ int main()
 		/*********************************
 		* Update
 		**********************************/
+
 		InputMgr::Update(dt.asSeconds(), window, ViewManager::GetInstance()->GetMainView());
 
 		SceneManager::GetInstance()->UpdateScene(dt.asSeconds());
