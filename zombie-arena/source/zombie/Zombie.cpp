@@ -4,6 +4,7 @@
 #include <iostream>
 #include "../plyer/Player.h"
 #include "../utils/GameLevelData.h"
+#include "../utils/ViewManager.h"
 
 std::vector<ZombieInfo> Zombie::zombieInfo;
 bool Zombie::isInitInfo = false;
@@ -128,9 +129,9 @@ bool Zombie::UpdateCollision(Time time, Player& player)
 {
 	if (sprite.getGlobalBounds().intersects(player.GetGobalBound()) && alive)
 	{
+		ViewManager::GetInstance()->CameraShake(time.asSeconds());
 		return player.OnHitted(time);
 	}
-
 	return false;
 }
 

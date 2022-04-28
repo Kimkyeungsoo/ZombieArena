@@ -1,4 +1,5 @@
 #include "ViewManager.h"
+#include "Utils.h"
 
 void ViewManager::Init()
 {
@@ -21,6 +22,16 @@ void ViewManager::ClearView()
 View& ViewManager::GetMainView()
 {
 	return *mainView;
+}
+
+void ViewManager::CameraShake(float dt)
+{
+	while (shakeTime > 0)
+	{
+		mainView->move(Utils::Random(-3.f, 3.f), Utils::Random(-3.f, 3.f));
+		shakeTime -= dt;
+	}
+	shakeTime = 2.f;
 }
 
 View& ViewManager::GetUiView()
