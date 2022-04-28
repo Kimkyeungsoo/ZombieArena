@@ -45,8 +45,6 @@ bool Zombie::OnHitted()
 {
 	Player player;
 	health -= player.GetDamage();
-	// 나중에 충돌처리 할 때
-	std::cout << "Hit" << std::endl;
 	return false;
 }
 

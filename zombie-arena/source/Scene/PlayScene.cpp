@@ -36,10 +36,15 @@ void PlayScene::Update(float dt)
 {
 	// playTime은 Time형 dt는 float형이라 일단 임시
 	playTime += clock.restart();
-
+	int count = 0;
 	for (auto zombie : zombies)
 	{
 		zombie->Update(dt, player.GetPosition(), arena);
+		if (zombie->GetHealth() <= 0)
+		{
+			zombies.erase(zombies.begin() + count);
+		}
+		count++;
 	}
 
 	for (auto item : items)
