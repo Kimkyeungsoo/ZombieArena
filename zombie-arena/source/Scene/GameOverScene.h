@@ -3,6 +3,10 @@
 
 class GameOverScene : public Scene
 {
+private:
+	Texture textureBackground;
+	Sprite spriteBackground;
+
 public:
 	GameOverScene();
 	virtual ~GameOverScene();
