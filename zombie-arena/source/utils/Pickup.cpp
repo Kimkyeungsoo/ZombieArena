@@ -92,3 +92,8 @@ PickupTypes Pickup::GetType()
 {
 	return type;
 }
+
+int Pickup::GetAmmo() const
+{
+	return AMMO_START_VALUE;
+}

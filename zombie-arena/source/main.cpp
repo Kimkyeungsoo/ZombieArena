@@ -60,7 +60,7 @@ int main()
 		window.clear();
 		window.setView(ViewManager::GetInstance()->GetMainView());
 		SceneManager::GetInstance()->DrawScene(window);
-		window.setView(ViewManager::GetInstance()->GetUiView());
+		//window.setView(ViewManager::GetInstance()->GetUiView());
 		window.display();
 	}
 

@@ -18,9 +18,11 @@ public:
 
 	void SetPosition(Vector2f zombieposition);
 
-	FloatRect GetGlobalBound();
 	Sprite GetSprite();
 
+	//void Update();
+
 	void SetActive(bool active);
+	bool GetActive();
 };
 

@@ -14,6 +14,12 @@ private:
 	Font fontZombiecontrol;
 	FloatRect textRect;
 
+
+	Text textScore;
+	Text textZombieCount;
+	Text textAmmo;
+	Sprite spriteAmmoIcon;
+
 	// 지금 내 코드에서 list가 유리한지 vector가 유리한지?
 	
 	// list의 경우 순서가 중요하며 중간 위치에 추가 삭제가 될 시에 유리하고
