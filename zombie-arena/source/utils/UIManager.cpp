@@ -86,7 +86,6 @@ void UIManager::Draw_TitleScene(RenderWindow& window)
 
 void UIManager::Init_PlayScene()
 {
-	int score = 0;
 	
 	textScore.setString("SCORE: ");
 	textScore.setPosition(20.f, 0.f);
@@ -108,7 +107,7 @@ void UIManager::Init_PlayScene()
 	Texture textureAmmoIcon = TextureHolder::GetTexture("graphics/ammo_icon.png");
 	spriteAmmoIcon.setTexture(textureAmmoIcon);
 	spriteAmmoIcon.setPosition(20, 980);
-		
+
 	// PlayScene에서 사용될 UI 초기설정 등록
 }
 
@@ -118,17 +117,21 @@ void UIManager::Draw_PlayScene(RenderWindow& window)
 	window.draw(textScore);
 	window.draw(textZombieCount);
 	window.draw(textAmmo);
+	window.draw(spriteAmmoIcon);
+	
 	// PlayScene에서 사용되는 UI들 Draw
 }
 
 void UIManager::Update_PlayScene()
 {
+	int score = 0;
 	int haveAmmo = Player::GetInstance()->GetHaveAmmo();
 	int totalAmmo = Player::GetInstance()->GetTotalAmmo();
 
 	stringstream ssAmmo;
 	ssAmmo << haveAmmo << "/" << totalAmmo;
 	textAmmo.setString(ssAmmo.str());
+
 }
 
 void UIManager::Init_UpgradeScene()

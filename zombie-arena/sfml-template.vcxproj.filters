@@ -1,126 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="리소스 파일">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Player">
-      <UniqueIdentifier>{450f73a6-9fff-4484-83a2-0bf04be7ee05}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Utils">
-      <UniqueIdentifier>{eaad4db1-a484-47ea-99e7-f3816feedf70}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Zombie">
-      <UniqueIdentifier>{ea8afa14-92aa-4b6f-b1d0-3443dfbfad06}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Bullet">
-      <UniqueIdentifier>{e077f144-8f7f-4a70-83af-3bc4c3bbd503}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scene">
-      <UniqueIdentifier>{a5ce7c4e-8117-4c5c-8315-699cfc8168b3}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="source\plyer\Player.cpp">
-      <Filter>Player</Filter>
-    </ClCompile>
-    <ClCompile Include="source\utils\Utils.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
+    <ClCompile Include="source\Scene\GameOverScene.cpp" />
+    <ClCompile Include="source\Scene\PlayScene.cpp" />
+    <ClCompile Include="source\Scene\Scene.cpp" />
+    <ClCompile Include="source\utils\SceneManager.cpp" />
+    <ClCompile Include="source\bullet\Bullet.cpp" />
+    <ClCompile Include="source\plyer\Player.cpp" />
+    <ClCompile Include="source\utils\InputMgr.cpp" />
+    <ClCompile Include="source\utils\Pickup.cpp" />
+    <ClCompile Include="source\utils\TextureHolder.cpp" />
+    <ClCompile Include="source\utils\Utils.cpp" />
     <ClCompile Include="source\main.cpp" />
-    <ClCompile Include="source\utils\InputMgr.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="source\utils\TextureHolder.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="source\zombie\Zombie.cpp">
-      <Filter>Zombie</Filter>
-    </ClCompile>
-    <ClCompile Include="source\bullet\Bullet.cpp">
-      <Filter>Bullet</Filter>
-    </ClCompile>
-    <ClCompile Include="source\utils\Pickup.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="source\zombie\Blood.cpp">
-      <Filter>Zombie</Filter>
-    <ClCompile Include="source\utils\SceneManager.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Scene\Scene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Scene\GameOverScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Scene\PlayScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Scene\UpgradeScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="source\Scene\TitleScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="source\utils\UIManager.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="source\utils\ViewManager.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
+    <ClCompile Include="source\zombie\Blood.cpp" />
+    <ClCompile Include="source\zombie\Zombie.cpp" />
+    <ClCompile Include="source\Scene\TitleScene.cpp" />
+    <ClCompile Include="source\Scene\UpgradeScene.cpp" />
+    <ClCompile Include="source\utils\UIManager.cpp" />
+    <ClCompile Include="source\utils\ViewManager.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="source\plyer\Player.h">
-      <Filter>Player</Filter>
-    </ClInclude>
-    <ClInclude Include="source\utils\Utils.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="source\utils\InputMgr.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="source\utils\TextureHolder.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="source\zombie\Zombie.h">
-      <Filter>Zombie</Filter>
-    </ClInclude>
-    <ClInclude Include="source\bullet\Bullet.h">
-      <Filter>Bullet</Filter>
-    </ClInclude>
-    <ClInclude Include="source\utils\Pickup.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="source\zombie\Blood.h">
-      <Filter>Zombie</Filter>
-    <ClInclude Include="source\utils\SceneManager.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="source\utils\Singleton.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Scene\Scene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Scene\GameOverScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Scene\PlayScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Scene\UpgradeScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="source\Scene\TitleScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="source\utils\UIManager.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="source\utils\ViewManager.h">
-      <Filter>Utils</Filter>
-    </ClInclude>
+    <ClInclude Include="source\Scene\GameOverScene.h" />
+    <ClInclude Include="source\Scene\PlayScene.h" />
+    <ClInclude Include="source\Scene\Scene.h" />
+    <ClInclude Include="source\utils\SceneManager.h" />
+    <ClInclude Include="source\bullet\Bullet.h" />
+    <ClInclude Include="source\plyer\Player.h" />
+    <ClInclude Include="source\utils\InputMgr.h" />
+    <ClInclude Include="source\utils\Pickup.h" />
+    <ClInclude Include="source\utils\Singleton.h" />
+    <ClInclude Include="source\utils\TextureHolder.h" />
+    <ClInclude Include="source\utils\Utils.h" />
+    <ClInclude Include="source\zombie\Blood.h" />
+    <ClInclude Include="source\zombie\Zombie.h" />
+    <ClInclude Include="source\Scene\TitleScene.h" />
+    <ClInclude Include="source\Scene\UpgradeScene.h" />
+    <ClInclude Include="source\utils\UIManager.h" />
+    <ClInclude Include="source\utils\ViewManager.h" />
+    <ClInclude Include="SoundManager.h" />
   </ItemGroup>
 </Project>

@@ -66,5 +66,9 @@ int main()
 
 	ViewManager::GetInstance()->ClearView();
 	SceneManager::GetInstance()->ClearScene();
+	
+
 	return 0;
+
+
 }

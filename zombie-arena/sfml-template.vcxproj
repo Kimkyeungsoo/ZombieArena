@@ -148,6 +148,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="source\Scene\GameOverScene.cpp" />
     <ClCompile Include="source\Scene\PlayScene.cpp" />
     <ClCompile Include="source\Scene\Scene.cpp" />
@@ -167,6 +168,7 @@
     <ClCompile Include="source\utils\ViewManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="source\Scene\GameOverScene.h" />
     <ClInclude Include="source\Scene\PlayScene.h" />
     <ClInclude Include="source\Scene\Scene.h" />
