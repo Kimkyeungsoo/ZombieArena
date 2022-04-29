@@ -1,8 +1,10 @@
 #include "Zombie.h"
 #include "../utils/TextureHolder.h"
 #include "../utils/Utils.h"
-#include <iostream>
 #include "../plyer/Player.h"
+#include "../utils/GameLevelData.h"
+#include "../utils/ViewManager.h"
+#include <iostream>
 
 std::vector<ZombieInfo> Zombie::zombieInfo;
 bool Zombie::isInitInfo = false;
@@ -46,6 +48,8 @@ bool Zombie::OnHitted()
 	health -= Player::GetInstance()->GetDamage();
 	if (health <= 0)
 	{
+		GameLevelData::GetInstance()->AddScore(1);
+		GameLevelData::GetInstance()->AddZombies(-1);
 		SetAlive(false);
 	}
 	return false;
@@ -127,7 +131,6 @@ bool Zombie::UpdateCollision(Time time, Player& player)
 	{
 		return player.OnHitted(time);
 	}
-
 	return false;
 }
 

@@ -1,15 +1,18 @@
 #include "Player.h"
 #include "../utils/Utils.h"
-#include "../utils/InputMgr.h"
-#include <cmath>
 #include "../utils/TextureHolder.h"
-#include <iostream>
-#include <algorithm>
+#include "../utils/GameLevelData.h"
 #include "../utils/Pickup.h"
-#include "..\utils\SceneManager.h"
+#include "../utils/InputMgr.h"
+#include "../utils/SceneManager.h"
+#include "../utils/ViewManager.h"
+#include <cmath>
+#include <algorithm>
+#include <iostream>
 
 Player::Player()
-	: speed(START_SPEED), health(START_HEALTH), maxHealth(START_HEALTH), immuneMs(START_IMMUNE_MS), arena(), resolution(), tileSize(0), textureFileName("graphics/player.png"), distanceToMuzzle(45.f), damage(START_DAMAGE)
+	: speed(START_SPEED), health(START_HEALTH), maxHealth(START_HEALTH), immuneMs(START_IMMUNE_MS), arena(), 
+	resolution(), tileSize(0), textureFileName("graphics/player.png"), distanceToMuzzle(45.f), damage(START_DAMAGE)
 {
 	sprite.setTexture(TextureHolder::GetTexture(textureFileName));
 	Utils::SetOrigin(sprite, Pivots::CC);
@@ -19,10 +22,14 @@ Player::Player()
 		unuseBullets.push_back(new Bullet());
 	}
 
-
 	totalAmmo = 30;
 	haveAmmo = totalAmmo;
-	reloadedAmmo = 12 * level_Reload;
+
+	font.loadFromFile("fonts/zombiecontrol.ttf");
+	textReloading.setString("RELOADING...");
+	textReloading.setCharacterSize(15);
+	textReloading.setFillColor(Color::Green);
+	textReloading.setFont(font);
 }
 
 Player::~Player()
@@ -41,9 +48,9 @@ Player::~Player()
 
 void Player::Shoot(Vector2f dir)
 {
-/**********************
-* 재장전
-***********************/
+	/**********************
+	* 재장전
+	***********************/
 	if (haveAmmo == 0)
 	{
 		return;
@@ -88,6 +95,7 @@ bool Player::OnHitted(Time timeHit)
 		health -= 10;
 		return true;
 	}
+	ViewManager::GetInstance()->CameraShake(timeHit.asSeconds());
 	return false;
 }
 
@@ -132,7 +140,7 @@ void Player::Update(float dt, IntRect arena)
 	// 사용자 입력
 	float h = InputMgr::GetAxis(Axis::Horizontal);
 	float v = InputMgr::GetAxis(Axis::Vertical);
-	Vector2f dir(h, v); // 사용자 입력
+	Vector2f dir(h, v); 
 
 	float length = sqrt(dir.x * dir.x + dir.y * dir.y);
 	if (length > 1.f)
@@ -177,9 +185,9 @@ void Player::Update(float dt, IntRect arena)
 		Shoot(Vector2f(mouseDir.x, mouseDir.y));
 	}
 
-/**********************
-* 재장전
-***********************/
+	/**********************
+	* 재장전
+	***********************/
 	if (InputMgr::GetKeyDown(Keyboard::R))
 	{
 		Reloading = true;
@@ -194,8 +202,6 @@ void Player::Update(float dt, IntRect arena)
 			timer = 2.f;
 		}
 	}
-
-
 
 	auto it = useBullets.begin();
 	while (it != useBullets.end())
@@ -213,10 +219,13 @@ void Player::Update(float dt, IntRect arena)
 			++it;
 		}
 	}
+
+	ViewManager::GetInstance()->turnoffDimmed();
 }
 
 bool Player::UpdateCollision(const std::list<Pickup*> items)
 {
+	//아이템과 충돌처리로 습득
 	FloatRect bounds = sprite.getGlobalBounds();
 	bool isCollided = false;
 	for (auto item : items)
@@ -240,13 +249,6 @@ bool Player::UpdateCollision(const std::list<Pickup*> items)
 			default:
 				break;
 			}
-			//item->GotIt();
-
-			//아이템 먹었을 때 사라져야 함
-			//1. 안보이게만 하고, 
-			//2. 아이템이 획득됐었는지 체크를 함. ???
-			//3. 게임 끝날 때 다 사라짐???
-			//4. 한번만 먹게 되어야 함
 		}
 		isCollided = true;
 	}
@@ -255,6 +257,7 @@ bool Player::UpdateCollision(const std::list<Pickup*> items)
 
 bool Player::UpdateCollision(const std::vector<Zombie*>& zombies)
 {
+	//좀비와 총알 충돌
 	bool isCollided = false;
 	for (auto bullet : useBullets)
 	{
@@ -273,6 +276,14 @@ void Player::Draw(RenderWindow& window)
 	for (auto bullet : useBullets)
 	{
 		window.draw(bullet->GetShape());
+	}
+
+	// 재장전 UI
+	if (Reloading)
+	{
+		textReloading.setPosition(position.x, position.y-30.f);
+		Utils::SetOrigin(textReloading, Pivots::CT);
+		window.draw(textReloading);
 	}
 }
 
@@ -298,20 +309,12 @@ void Player::UpgradeSpeed()
 void Player::UpgradeMaxHealth()
 {
 	maxHealth += START_HEALTH * 0.2;
-}
-
-void Player::UpgradeClipSize()
-{
-	level_Reload++;
-}
-
-void Player::UpgradeRateOfFire()
-{
+	health = maxHealth;
 }
 
 void Player::Reload()
 {
-	haveAmmo = totalAmmo + reloadedAmmo;
+	haveAmmo = totalAmmo + (RELOAD_AMMO * GameLevelData::GetInstance()->GetClipSize());
 }
 
 int Player::GetHaveAmmo()

@@ -3,7 +3,7 @@
 #include "ViewManager.h"
 #include "../plyer/Player.h"
 #include "GameLevelData.h"
-#include "..\utils\InputMgr.h"
+#include "../utils/InputMgr.h"
 #include <sstream>
 
 void UIManager::Init(SCENE_TYPE type)
@@ -100,40 +100,70 @@ void UIManager::Draw_TitleScene(RenderWindow& window)
 }
 
 void UIManager::Init_PlayScene()
-{
-	int score = 0;
-	
+{	
 	textScore.setString("SCORE: ");
-	textScore.setPosition(20.f, 0.f);
+	textScore.setPosition(150.f, 10.f);
 	textScore.setCharacterSize(45);
 	textScore.setFillColor(Color::White);
 	textScore.setFont(fontZombiecontrol);
 
+	textScoreNumber.setPosition(280.f, 10.f);
+	textScoreNumber.setCharacterSize(45);
+	textScoreNumber.setFillColor(Color::White);
+	textScoreNumber.setFont(fontZombiecontrol);
+
+	textWave.setString("WAVE:");
+	textWave.setPosition(1300.f, 980.f);
+	textWave.setCharacterSize(45);
+	textWave.setFillColor(Color::White);
+	textWave.setFont(fontZombiecontrol);
+
+	textWaveNumber.setPosition(1430.f, 980.f);
+	textWaveNumber.setCharacterSize(45);
+	textWaveNumber.setFillColor(Color::White);
+	textWaveNumber.setFont(fontZombiecontrol);
+
 	textZombieCount.setString("ZOMBIES: ");
-	textZombieCount.setPosition(1500.f, 980.f);
+	textZombieCount.setPosition(1550.f, 980.f);
 	textZombieCount.setCharacterSize(45);
 	textZombieCount.setFillColor(Color::White);
 	textZombieCount.setFont(fontZombiecontrol);
 
+	textZombieCountNumber.setPosition(1730.f, 980.f);
+	textZombieCountNumber.setCharacterSize(45);
+	textZombieCountNumber.setFillColor(Color::White);
+	textZombieCountNumber.setFont(fontZombiecontrol);
+
+	textHealth.setPosition(450.f, 980.f);
+	textHealth.setCharacterSize(45);
+	textHealth.setFillColor(Color::Red);
+	textHealth.setFont(fontZombiecontrol);
+
 	textAmmo.setPosition(200.f, 980.f);
 	textAmmo.setCharacterSize(45);
-	textAmmo.setFillColor(Color::White);
+	textAmmo.setFillColor(Color::Yellow);
 	textAmmo.setFont(fontZombiecontrol);
 
-	Texture textureAmmoIcon = TextureHolder::GetTexture("graphics/ammo_icon.png");
+	textureAmmoIcon = TextureHolder::GetTexture("graphics/ammo_icon.png");
 	spriteAmmoIcon.setTexture(textureAmmoIcon);
-	spriteAmmoIcon.setPosition(20, 980);
-		
-	// PlayScene에서 사용될 UI 초기설정 등록
+	spriteAmmoIcon.setPosition(140.f, 975.f);
 }
 
 void UIManager::Draw_PlayScene(RenderWindow& window)
 {
 	window.setView(ViewManager::GetInstance()->GetUiView());
+	ViewManager::GetInstance()->draw(window);
+	window.draw(textHighScore);
+	window.draw(textHighScoreNumber);
 	window.draw(textScore);
+	window.draw(textScoreNumber);
+	window.draw(textWave);
+	window.draw(textWaveNumber);
 	window.draw(textZombieCount);
+	window.draw(textZombieCountNumber);
 	window.draw(textAmmo);
-	// PlayScene에서 사용되는 UI들 Draw
+	window.draw(spriteAmmoIcon);
+	window.draw(textHealth);
 }
 
 void UIManager::Update_PlayScene()
@@ -141,9 +171,29 @@ void UIManager::Update_PlayScene()
 	int haveAmmo = Player::GetInstance()->GetHaveAmmo();
 	int totalAmmo = Player::GetInstance()->GetTotalAmmo();
 
+	stringstream ssScore;
+	ssScore << GameLevelData::GetInstance()->GetScore();
+	textScoreNumber.setString(ssScore.str());
+
+	stringstream ssHighScore;
+	ssHighScore << GameLevelData::GetInstance()->GetHighScore();
+	textHighScoreNumber.setString(ssHighScore.str());
+
+	stringstream ssWave;
+	ssWave << GameLevelData::GetInstance()->GetWave();
+	textWaveNumber.setString(ssWave.str());
+
+	stringstream ssCountZombies;
+	ssCountZombies << GameLevelData::GetInstance()->GetCountZombies();
+	textZombieCountNumber.setString(ssCountZombies.str());
+
 	stringstream ssAmmo;
 	ssAmmo << haveAmmo << "/" << totalAmmo;
 	textAmmo.setString(ssAmmo.str());
+
+	stringstream sshealth;
+	sshealth << Player::GetInstance()->GetHealth();
+	textHealth.setString(sshealth.str());
 }
 
 void UIManager::Init_UpgradeScene()
@@ -158,7 +208,7 @@ void UIManager::Init_UpgradeScene()
 		textUpgrades.push_back(text);
 	}
 
-	textUpgrades[0].setString("1- INCREASED RATE OF FIRE");
+	textUpgrades[0].setString("1- INCREASED SIZE OF MAP");
 	textUpgrades[1].setString("2- INCREASED CLIP SIZE(NEXT RELOAD)");
 	textUpgrades[2].setString("3- INCREASED MAX HEALTH");
 	textUpgrades[3].setString("4- INCREASED RUN SPEED");
@@ -177,33 +227,37 @@ void UIManager::Update_UpgradeScene()
 	bool isChooseUpgrade = false;
 	auto pos = InputMgr::GetMousePosition();
 
+	// 업그레이드 항목 UI TEXT에 마우스 호버링 체크
 	for (int i = 0; i < 6; ++i)
 	{
 		if (textUpgrades[i].getGlobalBounds().contains(pos.x, pos.y))
 		{
 			textUpgrades[i].setFillColor(Color::Red);
-			// 클릭했을 때
+			// 해당 항목을 클릭했을 때
 			if (InputMgr::GetMouseButtonDown(Mouse::Button::Left))
 			{
 				switch (i)
 				{
-				case 0:
-					Player::GetInstance()->UpgradeRateOfFire();
-					isChooseUpgrade = true;
+				case SIZE_OF_MAP:
+					GameLevelData::GetInstance()->UpgradeMapSize();
 					break;
-				case 1:
-					Player::GetInstance()->UpgradeClipSize();
-					isChooseUpgrade = true;
+				case CLIP_SIZE:
+					GameLevelData::GetInstance()->UpgradeClipSize();
 					break;
-				case 2:
+				case MAX_HEALTH:
 					Player::GetInstance()->UpgradeMaxHealth();
-					isChooseUpgrade = true;
 					break;
-				case 3:
+				case SPEED:
 					Player::GetInstance()->UpgradeSpeed();
-					isChooseUpgrade = true;
+					break;
+				case HP_LEVEL:
+					GameLevelData::GetInstance()->Upgrade_HP_level();
+					break;
+				case AP_LEVEL:
+					GameLevelData::GetInstance()->Upgrade_AP_level();
 					break;
 				}
+				isChooseUpgrade = true;
 			}
 		}
 		else

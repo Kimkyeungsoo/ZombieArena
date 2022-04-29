@@ -20,9 +20,56 @@ int GameLevelData::GetHighScore()
     return highScore;
 }
 
-void GameLevelData::SetCountZombies(int count)
+int GameLevelData::GetArena_x()
 {
-    countZombies = count;
+    return arena_x;
+}
+
+int GameLevelData::GetArena_y()
+{
+    return arena_y;
+}
+
+int GameLevelData::GetClipSize()
+{
+    return level_ClipSize;
+}
+
+int GameLevelData::GetLevel_HP()
+{
+    return level_Health_Pickup;
+}
+
+int GameLevelData::GetLevel_AP()
+{
+    return level_Ammo_Pickup;
+}
+
+float GameLevelData::GetSpawnTime_HP()
+{
+    return spawnTime_HP;
+}
+
+float GameLevelData::GetSpawnTime_AP()
+{
+    return spawnTime_AP;
+}
+
+void GameLevelData::SetDefaultData()
+{
+    arena_x = 600;
+    arena_y = 600;
+    countZombies = 10;
+    wave = 1;
+    score = 0;
+    level_ClipSize = 0;
+    level_Zombie = 0;
+}
+
+void GameLevelData::LevelUpCountZombies()
+{
+    level_Zombie++;
+    countZombies = 10 + level_Zombie * 5;
 }
 
 void GameLevelData::AddZombies(int count)
@@ -30,9 +77,14 @@ void GameLevelData::AddZombies(int count)
     countZombies += count;
 }
 
-void GameLevelData::SetWave(int value)
+void GameLevelData::AddWave()
 {
-    wave = value;
+    wave++;
+}
+
+void GameLevelData::AddScore(int value)
+{
+    this->score += value;
 }
 
 void GameLevelData::SetScore(int score)
@@ -43,4 +95,27 @@ void GameLevelData::SetScore(int score)
 void GameLevelData::SetHighScore(int highScore)
 {
     this->highScore = highScore;
+}
+
+void GameLevelData::UpgradeMapSize()
+{
+    arena_x += 100;
+    arena_y += 100;
+}
+
+void GameLevelData::UpgradeClipSize()
+{
+    level_ClipSize++;
+}
+
+void GameLevelData::Upgrade_HP_level()
+{
+    spawnTime_HP++;
+    level_Health_Pickup++;
+}
+
+void GameLevelData::Upgrade_AP_level()
+{
+    spawnTime_AP++;
+    level_Ammo_Pickup++;
 }

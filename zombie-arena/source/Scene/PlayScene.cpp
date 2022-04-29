@@ -1,17 +1,18 @@
 #include "PlayScene.h"
-#include "..\utils\Utils.h"
-#include "..\utils\TextureHolder.h"
-#include "..\zombie\Zombie.h"
-#include "..\utils\Pickup.h"
-#include "..\utils\ViewManager.h"
-#include "..\utils\InputMgr.h"
-#include "..\utils\SceneManager.h"
-#include "..\utils\ViewManager.h"
-#include "..\plyer\Player.h"
-#include "..\utils\UIManager.h"
+#include "../utils/Utils.h"
+#include "../utils/TextureHolder.h"
+#include "../zombie/Zombie.h"
+#include "../utils/Pickup.h"
+#include "../utils/ViewManager.h"
+#include "../utils/InputMgr.h"
+#include "../utils/SceneManager.h"
+#include "../utils/ViewManager.h"
+#include "../plyer/Player.h"
+#include "../utils/UIManager.h"
+#include "../utils/GameLevelData.h"
 
 PlayScene::PlayScene()
-	:countZombies(10)
+	:countZombies(GameLevelData::GetInstance()->GetCountZombies())
 {
 	textureBackground = TextureHolder::GetTexture("graphics/background_sheet.png");
 	textureCrosshair = TextureHolder::GetTexture("graphics/crosshair.png");
@@ -25,7 +26,7 @@ PlayScene::~PlayScene()
 
 void PlayScene::Init()
 {
-	SetArenaSize(800, 800);
+	SetArenaSize(GameLevelData::GetInstance()->GetArena_x(), GameLevelData::GetInstance()->GetArena_y());
 	AddItems();
 
 	Player::GetInstance()->Spawn(arena, ViewManager::GetInstance()->GetResolution(), 0);
@@ -36,12 +37,16 @@ void PlayScene::Init()
 
 void PlayScene::Update(float dt)
 {
-	// playTime은 Time형 dt는 float형이라 일단 임시
 	playTime += clock.restart();
 	
 	for (auto zombie : zombies)
 	{
 		zombie->Update(dt, Player::GetInstance()->GetPosition(), arena);
+	}
+
+	if (GameLevelData::GetInstance()->GetScore() >= GameLevelData::GetInstance()->GetHighScore())
+	{
+		GameLevelData::GetInstance()->SetHighScore(GameLevelData::GetInstance()->GetScore());
 	}
 
 	for (auto item : items)
@@ -56,15 +61,17 @@ void PlayScene::Update(float dt)
 	CollisionCheck();
 
 	UIManager::GetInstance()->Update_PlayScene();
-
-	// 씬넘어가기 위한 테스트용
-	if (InputMgr::GetKeyDown(Keyboard::Space))
+	
+	if (GameLevelData::GetInstance()->GetCountZombies() == 0)
 	{
+		GameLevelData::GetInstance()->LevelUpCountZombies();
+		GameLevelData::GetInstance()->AddWave();
 		SceneManager::GetInstance()->LoadScene(SCENE_TYPE::UPGRADE);
 	}
 
 	if (Player::GetInstance()->GetHealth() <= 0.f)
 	{
+		GameLevelData::GetInstance()->SetDefaultData();
 		SceneManager::GetInstance()->LoadScene(SCENE_TYPE::GAME_OVER);
 		return;
 	}
@@ -237,12 +244,17 @@ void PlayScene::AddItems()
 	// 여기서 새로 동적할당을 매번하고,
 	// items에 넣어주는 식으로 간다면
 	// 이 함수가 호출될 때마다 아이템이 추가로 배치될 수 있음
-	Pickup* ammoPickup = new Pickup(PickupTypes::Ammo);
-	Pickup* healthPickup = new Pickup(PickupTypes::Health);
+	for (int i = 0; i < GameLevelData::GetInstance()->GetLevel_AP(); ++i)
+	{
+		Pickup* ammoPickup = new Pickup(PickupTypes::Ammo);
+		ammoPickup->SetArena(arena);
+		items.push_back(ammoPickup);
+	}
 
-	ammoPickup->SetArena(arena);
-	healthPickup->SetArena(arena);
-
-	items.push_back(ammoPickup);
-	items.push_back(healthPickup);
+	for (int i = 0; i < GameLevelData::GetInstance()->GetLevel_HP(); ++i)
+	{
+		Pickup* healthPickup = new Pickup(PickupTypes::Health);
+		healthPickup->SetArena(arena);
+		items.push_back(healthPickup);
+	}
 }
