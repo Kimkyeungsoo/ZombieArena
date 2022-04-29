@@ -2,6 +2,7 @@
 #include "TextureHolder.h"
 #include "Utils.h"
 #include <iostream>
+#include "../sound/SoundManager.h"
 #include "GameLevelData.h"
 
 Pickup::Pickup(PickupTypes type)
@@ -41,8 +42,8 @@ void Pickup::Spawn(bool spawn)
 	{
 		timer = START_SENONDS_FOR_LIVE;
 
-		int x = Utils::Random(arena.left, arena.left + arena.width);
-		int y = Utils::Random(arena.top, arena.top + arena.height);
+		int x = Utils::Random(arena.left + 50, arena.left + arena.width - 50);
+		int y = Utils::Random(arena.top + 50, arena.top + arena.height - 50);
 
 		sprite.setPosition(Vector2f(x, y));
 		isgetIt = true;
@@ -59,6 +60,7 @@ void Pickup::Spawn(bool spawn)
 
 int Pickup::GotIt()
 {
+	SoundManager::GetInstance()->pickupSound->play();
 	isgetIt = false;
 	return value;
 }

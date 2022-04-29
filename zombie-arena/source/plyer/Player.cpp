@@ -8,7 +8,10 @@
 #include "../utils/ViewManager.h"
 #include <cmath>
 #include <algorithm>
-#include <iostream>
+#include "../utils/Pickup.h"
+#include "..\utils\SceneManager.h"
+#include "../sound/SoundManager.h"
+
 
 Player::Player()
 	: speed(START_SPEED), health(START_HEALTH), maxHealth(START_HEALTH), immuneMs(START_IMMUNE_MS), arena(), 
@@ -49,16 +52,18 @@ Player::~Player()
 void Player::Shoot(Vector2f dir)
 {
 	/**********************
-	* ÀçÀåÀü
+	* ì¬ì¥ì „
 	***********************/
 	if (haveAmmo == 0)
 	{
+		SoundManager::GetInstance()->reloadFailedSound->play();
 		return;
 	}
-	// ¹ß»ç ½Ã ¸¶´Ù ÀåÅº¼ö °¨¼Ò
+	SoundManager::GetInstance()->hitSound->play();
+	// ë°œì‚¬ ì‹œ ë§ˆë‹¤ ì¥íƒ„ìˆ˜ ê°ì†Œ
 	haveAmmo--;
 
-	// °¡Á®¿À°í ÃÊ±âÈ­ ¹ß»ç ±îÁö
+	// ê°€ì ¸ì˜¤ê³  ì´ˆê¸°í™” ë°œì‚¬ ê¹Œì§€
 	dir = Utils::Normalize(dir);
 
 	Vector2f spawnPos = position + dir * distanceToMuzzle;
@@ -137,7 +142,7 @@ int Player::GetDamage() const
 void Player::Update(float dt, IntRect arena)
 {
 	Vector2f positionTemp = position;
-	// »ç¿ëÀÚ ÀÔ·Â
+	// ì‚¬ìš©ì ì…ë ¥
 	float h = InputMgr::GetAxis(Axis::Horizontal);
 	float v = InputMgr::GetAxis(Axis::Vertical);
 	Vector2f dir(h, v); 
@@ -148,10 +153,10 @@ void Player::Update(float dt, IntRect arena)
 		dir /= length;
 	}
 
-	// ÀÌµ¿
+	// ì´ë™
 	position += dir * speed * dt;	// v = dt
 	/**********************************************
-	* ¿Ü°û º® Ãæµ¹ Ã³¸®
+	* ì™¸ê³½ ë²½ ì¶©ëŒ ì²˜ë¦¬
 	**********************************************/
 	if (position.x < arena.left + 50.f || position.x > arena.width - 50.f)
 	{
@@ -162,8 +167,8 @@ void Player::Update(float dt, IntRect arena)
 		position.y = positionTemp.y;
 	}
 	sprite.setPosition(position);
-	// È¸Àü
-	// µÎ º¤ÅÍ »çÀÌÀÇ »çÀÌ°¢À» ±¸ÇÏ´Â°ÍÀº ¾ÆÅ©ÅºÁ¨Æ®»ç¿ë
+	// íšŒì „
+	// ë‘ ë²¡í„° ì‚¬ì´ì˜ ì‚¬ì´ê°ì„ êµ¬í•˜ëŠ”ê²ƒì€ ì•„í¬íƒ„ì  íŠ¸ì‚¬ìš©
 	Vector2i mousePos = InputMgr::GetMousePosition();
 	Vector2i mouseDir;
 	mouseDir.x = mousePos.x - resolution.x * 0.5f;
@@ -178,7 +183,7 @@ void Player::Update(float dt, IntRect arena)
 
 
 	/**********************
-	* ÃÑ¾Ë
+	* ì´ì•Œ
 	***********************/
 	if (InputMgr::GetMouseButtonDown(Mouse::Button::Left) && !Reloading)
 	{
@@ -186,7 +191,7 @@ void Player::Update(float dt, IntRect arena)
 	}
 
 	/**********************
-	* ÀçÀåÀü
+	* ì¬ì¥ì „
 	***********************/
 	if (InputMgr::GetKeyDown(Keyboard::R))
 	{
@@ -197,6 +202,8 @@ void Player::Update(float dt, IntRect arena)
 		timer -= dt;
 		if (timer < 0.f)
 		{
+			SoundManager::GetInstance()->reloadFailedSound->play();
+			SoundManager::GetInstance()->reloadSound->play();
 			Reload();
 			Reloading = false;
 			timer = 2.f;
@@ -225,7 +232,7 @@ void Player::Update(float dt, IntRect arena)
 
 bool Player::UpdateCollision(const std::list<Pickup*> items)
 {
-	//¾ÆÀÌÅÛ°ú Ãæµ¹Ã³¸®·Î ½Àµæ
+	//ì•„ì´í…œê³¼ ì¶©ëŒì²˜ë¦¬ë¡œ ìŠµë“
 	FloatRect bounds = sprite.getGlobalBounds();
 	bool isCollided = false;
 	for (auto item : items)
@@ -257,7 +264,7 @@ bool Player::UpdateCollision(const std::list<Pickup*> items)
 
 bool Player::UpdateCollision(const std::vector<Zombie*>& zombies)
 {
-	//Á»ºñ¿Í ÃÑ¾Ë Ãæµ¹
+	//ì¢€ë¹„ì™€ ì´ì•Œ ì¶©ëŒ
 	bool isCollided = false;
 	for (auto bullet : useBullets)
 	{
@@ -278,7 +285,7 @@ void Player::Draw(RenderWindow& window)
 		window.draw(bullet->GetShape());
 	}
 
-	// ÀçÀåÀü UI
+	// ì¬ì¥ì „ UI
 	if (Reloading)
 	{
 		textReloading.setPosition(position.x, position.y-30.f);
