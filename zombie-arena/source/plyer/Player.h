@@ -2,10 +2,12 @@
 #pragma once
 
 #include "SFML/Graphics.hpp"
-#include "..\utils\Singleton.h"
+#include "../utils/Singleton.h"
 #include <string>
 #include "../bullet/Bullet.h"
 #include <list>
+
+#define RELOAD_AMMO 12
 
 using namespace sf;
 
@@ -15,7 +17,7 @@ class Player : public Singleton<Player>
 private:
 	const float START_SPEED = 300.f;
 	const int START_HEALTH = 100;
-	const float START_IMMUNE_MS = 500.f;
+	const float START_IMMUNE_MS = 300.f;
 	const int START_DAMAGE = 1;
 
 	Vector2f position;
@@ -35,7 +37,6 @@ private:
 	int health;
 	int maxHealth;
 	float immuneMs;
-	//bool inmune;
 
 	Time lastHit;
 
@@ -43,13 +44,12 @@ private:
 	std::list<Bullet*> unuseBullets;	// 사용하지 않은 불릿
 	std::list<Bullet*> useBullets;	//	사용중인 불릿
 
-
 	int totalAmmo;	//전체 탄 수
 	int haveAmmo;	//현재 가지고 있는 탄 수
-	int reloadedAmmo; //재장전된 탄 수
-	int level_Reload = 0; //리로드 강화한 횟수
 	float timer = 2.f;
 
+	Font font;
+	Text textReloading;
 	bool Reloading = false;
 
 	float distanceToMuzzle;
@@ -69,7 +69,7 @@ public:
 	float GetRotation() const;
 	Sprite GetSprite() const;
 	int GetHealth() const;
-	int GetDamage() const;	// 데미지
+	int GetDamage() const;
 
 	void Update(float dt, IntRect arena);
 	bool UpdateCollision(const std::list<Pickup*> items);
@@ -81,8 +81,6 @@ public:
 
 	void UpgradeSpeed();
 	void UpgradeMaxHealth();
-	void UpgradeClipSize();
-	void UpgradeRateOfFire();
 
 	void Reload();
 	int GetHaveAmmo();

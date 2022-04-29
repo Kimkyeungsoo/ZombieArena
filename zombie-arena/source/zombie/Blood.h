@@ -20,8 +20,6 @@ public:
 
 	Sprite GetSprite();
 
-	//void Update();
-
 	void SetActive(bool active);
 	bool GetActive();
 };

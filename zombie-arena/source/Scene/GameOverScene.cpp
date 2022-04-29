@@ -1,8 +1,8 @@
 #include "GameOverScene.h"
-#include "..\utils\InputMgr.h"
-#include "..\utils\TextureHolder.h"
-#include "..\utils\SceneManager.h"
-#include "..\plyer\Player.h"
+#include "../utils/InputMgr.h"
+#include "../utils/TextureHolder.h"
+#include "../utils/SceneManager.h"
+#include "../plyer/Player.h"
 
 GameOverScene::GameOverScene()
 {

@@ -1,16 +1,21 @@
 #include "Player.h"
 #include "../utils/Utils.h"
-#include "../utils/InputMgr.h"
-#include <cmath>
 #include "../utils/TextureHolder.h"
-#include <iostream>
+#include "../utils/GameLevelData.h"
+#include "../utils/Pickup.h"
+#include "../utils/InputMgr.h"
+#include "../utils/SceneManager.h"
+#include "../utils/ViewManager.h"
+#include <cmath>
 #include <algorithm>
 #include "../utils/Pickup.h"
 #include "..\utils\SceneManager.h"
 #include "../sound/SoundManager.h"
 
+
 Player::Player()
-	: speed(START_SPEED), health(START_HEALTH), maxHealth(START_HEALTH), immuneMs(START_IMMUNE_MS), arena(), resolution(), tileSize(0), textureFileName("graphics/player.png"), distanceToMuzzle(45.f), damage(START_DAMAGE)
+	: speed(START_SPEED), health(START_HEALTH), maxHealth(START_HEALTH), immuneMs(START_IMMUNE_MS), arena(), 
+	resolution(), tileSize(0), textureFileName("graphics/player.png"), distanceToMuzzle(45.f), damage(START_DAMAGE)
 {
 	sprite.setTexture(TextureHolder::GetTexture(textureFileName));
 	Utils::SetOrigin(sprite, Pivots::CC);
@@ -20,10 +25,14 @@ Player::Player()
 		unuseBullets.push_back(new Bullet());
 	}
 
-
 	totalAmmo = 30;
 	haveAmmo = totalAmmo;
-	reloadedAmmo = 12 * level_Reload;
+
+	font.loadFromFile("fonts/zombiecontrol.ttf");
+	textReloading.setString("RELOADING...");
+	textReloading.setCharacterSize(15);
+	textReloading.setFillColor(Color::Green);
+	textReloading.setFont(font);
 }
 
 Player::~Player()
@@ -43,7 +52,7 @@ Player::~Player()
 void Player::Shoot(Vector2f dir)
 {
 	/**********************
-	* ÀçÀåÀü
+	* ì¬ì¥ì „
 	***********************/
 	if (haveAmmo == 0)
 	{
@@ -51,10 +60,10 @@ void Player::Shoot(Vector2f dir)
 		return;
 	}
 	SoundManager::GetInstance()->hitSound->play();
-	// ¹ß»ç ½Ã ¸¶´Ù ÀåÅº¼ö °¨¼Ò
+	// ë°œì‚¬ ì‹œ ë§ˆë‹¤ ì¥íƒ„ìˆ˜ ê°ì†Œ
 	haveAmmo--;
 
-	// °¡Á®¿À°í ÃÊ±âÈ­ ¹ß»ç ±îÁö
+	// ê°€ì ¸ì˜¤ê³  ì´ˆê¸°í™” ë°œì‚¬ ê¹Œì§€
 	dir = Utils::Normalize(dir);
 
 	Vector2f spawnPos = position + dir * distanceToMuzzle;
@@ -91,6 +100,7 @@ bool Player::OnHitted(Time timeHit)
 		health -= 10;
 		return true;
 	}
+	ViewManager::GetInstance()->CameraShake(timeHit.asSeconds());
 	return false;
 }
 
@@ -132,10 +142,10 @@ int Player::GetDamage() const
 void Player::Update(float dt, IntRect arena)
 {
 	Vector2f positionTemp = position;
-	// »ç¿ëÀÚ ÀÔ·Â
+	// ì‚¬ìš©ì ì…ë ¥
 	float h = InputMgr::GetAxis(Axis::Horizontal);
 	float v = InputMgr::GetAxis(Axis::Vertical);
-	Vector2f dir(h, v); // »ç¿ëÀÚ ÀÔ·Â
+	Vector2f dir(h, v); 
 
 	float length = sqrt(dir.x * dir.x + dir.y * dir.y);
 	if (length > 1.f)
@@ -143,10 +153,10 @@ void Player::Update(float dt, IntRect arena)
 		dir /= length;
 	}
 
-	// ÀÌµ¿
+	// ì´ë™
 	position += dir * speed * dt;	// v = dt
 	/**********************************************
-	* ¿Ü°û º® Ãæµ¹ Ã³¸®
+	* ì™¸ê³½ ë²½ ì¶©ëŒ ì²˜ë¦¬
 	**********************************************/
 	if (position.x < arena.left + 50.f || position.x > arena.width - 50.f)
 	{
@@ -157,8 +167,8 @@ void Player::Update(float dt, IntRect arena)
 		position.y = positionTemp.y;
 	}
 	sprite.setPosition(position);
-	// È¸Àü
-	// µÎ º¤ÅÍ »çÀÌÀÇ »çÀÌ°¢À» ±¸ÇÏ´Â°ÍÀº ¾ÆÅ©ÅºÁ¨Æ®»ç¿ë
+	// íšŒì „
+	// ë‘ ë²¡í„° ì‚¬ì´ì˜ ì‚¬ì´ê°ì„ êµ¬í•˜ëŠ”ê²ƒì€ ì•„í¬íƒ„ì  íŠ¸ì‚¬ìš©
 	Vector2i mousePos = InputMgr::GetMousePosition();
 	Vector2i mouseDir;
 	mouseDir.x = mousePos.x - resolution.x * 0.5f;
@@ -173,7 +183,7 @@ void Player::Update(float dt, IntRect arena)
 
 
 	/**********************
-	* ÃÑ¾Ë
+	* ì´ì•Œ
 	***********************/
 	if (InputMgr::GetMouseButtonDown(Mouse::Button::Left) && !Reloading)
 	{
@@ -181,7 +191,7 @@ void Player::Update(float dt, IntRect arena)
 	}
 
 	/**********************
-	* ÀçÀåÀü
+	* ì¬ì¥ì „
 	***********************/
 	if (InputMgr::GetKeyDown(Keyboard::R))
 	{
@@ -200,8 +210,6 @@ void Player::Update(float dt, IntRect arena)
 		}
 	}
 
-
-
 	auto it = useBullets.begin();
 	while (it != useBullets.end())
 	{
@@ -218,10 +226,13 @@ void Player::Update(float dt, IntRect arena)
 			++it;
 		}
 	}
+
+	ViewManager::GetInstance()->turnoffDimmed();
 }
 
 bool Player::UpdateCollision(const std::list<Pickup*> items)
 {
+	//ì•„ì´í…œê³¼ ì¶©ëŒì²˜ë¦¬ë¡œ ìŠµë“
 	FloatRect bounds = sprite.getGlobalBounds();
 	bool isCollided = false;
 	for (auto item : items)
@@ -245,13 +256,6 @@ bool Player::UpdateCollision(const std::list<Pickup*> items)
 			default:
 				break;
 			}
-			//item->GotIt();
-
-			//¾ÆÀÌÅÛ ¸Ô¾úÀ» ¶§ »ç¶óÁ®¾ß ÇÔ
-			//1. ¾Èº¸ÀÌ°Ô¸¸ ÇÏ°í, 
-			//2. ¾ÆÀÌÅÛÀÌ È¹µæµÆ¾ú´ÂÁö Ã¼Å©¸¦ ÇÔ. ???
-			//3. °ÔÀÓ ³¡³¯ ¶§ ´Ù »ç¶óÁü???
-			//4. ÇÑ¹ø¸¸ ¸Ô°Ô µÇ¾î¾ß ÇÔ
 		}
 		isCollided = true;
 	}
@@ -260,6 +264,7 @@ bool Player::UpdateCollision(const std::list<Pickup*> items)
 
 bool Player::UpdateCollision(const std::vector<Zombie*>& zombies)
 {
+	//ì¢€ë¹„ì™€ ì´ì•Œ ì¶©ëŒ
 	bool isCollided = false;
 	for (auto bullet : useBullets)
 	{
@@ -278,6 +283,14 @@ void Player::Draw(RenderWindow& window)
 	for (auto bullet : useBullets)
 	{
 		window.draw(bullet->GetShape());
+	}
+
+	// ì¬ì¥ì „ UI
+	if (Reloading)
+	{
+		textReloading.setPosition(position.x, position.y-30.f);
+		Utils::SetOrigin(textReloading, Pivots::CT);
+		window.draw(textReloading);
 	}
 }
 
@@ -303,20 +316,12 @@ void Player::UpgradeSpeed()
 void Player::UpgradeMaxHealth()
 {
 	maxHealth += START_HEALTH * 0.2;
-}
-
-void Player::UpgradeClipSize()
-{
-	level_Reload++;
-}
-
-void Player::UpgradeRateOfFire()
-{
+	health = maxHealth;
 }
 
 void Player::Reload()
 {
-	haveAmmo = totalAmmo + reloadedAmmo;
+	haveAmmo = totalAmmo + (RELOAD_AMMO * GameLevelData::GetInstance()->GetClipSize());
 }
 
 int Player::GetHaveAmmo()

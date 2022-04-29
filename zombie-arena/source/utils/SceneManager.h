@@ -1,6 +1,6 @@
 #pragma once
 #include "Singleton.h"
-#include "..\Scene\Scene.h"
+#include "../Scene/Scene.h"
 
 enum class SCENE_TYPE
 {

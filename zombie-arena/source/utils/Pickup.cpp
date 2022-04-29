@@ -3,6 +3,7 @@
 #include "Utils.h"
 #include <iostream>
 #include "../sound/SoundManager.h"
+#include "GameLevelData.h"
 
 Pickup::Pickup(PickupTypes type)
 	: type(type), isgetIt(false)
@@ -49,7 +50,11 @@ void Pickup::Spawn(bool spawn)
 	}
 	else
 	{
-		timer = START_WAIT_TIME;
+		if(type == PickupTypes::Ammo)
+			timer = START_WAIT_TIME - (0.25 * GameLevelData::GetInstance()->GetSpawnTime_AP());
+		else if(type == PickupTypes::Health)
+			timer = START_WAIT_TIME - (0.25 * GameLevelData::GetInstance()->GetSpawnTime_HP());
+
 	}
 }
 
